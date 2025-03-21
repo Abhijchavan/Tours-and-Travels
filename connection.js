@@ -5,10 +5,10 @@ var conn;
 
 try {
     conn = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "tours_and_travels"
+        host: "bjggynpor9l8tkxsngoc-mysql.services.clever-cloud.com",
+        user: "usd6jvwiumne7mgr",
+        password: "usd6jvwiumne7mgr",
+        database: "bjggynpor9l8tkxsngoc"
     });
 
     conn.connect((err) => {
