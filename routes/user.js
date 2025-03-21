@@ -77,7 +77,6 @@ router.get('/user/check_available_seat', async (req, res) => {
     res.render("user/check_available_seat.ejs");
 });
 
-
 router.get("/book_bus", async (req, res) => {
     const from = req.query.from || "";
     const to = req.query.to || "";
