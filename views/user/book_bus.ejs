@@ -1,22 +1,205 @@
 <%- include("navbar.ejs"); %>
+<style>
+    body{
+        background-color: #f5f5f5;
+    }
+</style>
+<div class="container-fluid  py-5 mb-5 " style="background-color: white;" ></div>
 
-<div class="container">
+
+<div class="container-fluid ">
     <div class="row">
-        <div class="col-md-12 ">
-             <div class="search-bar d-none">
-                <input type="text" id="from" placeholder="From" value="<%= from %>">
-                <input type="text" id="to" placeholder="To" value="<%= to %>">
-                <button id="search">Search</button>
-            </div> 
-            <div class="bus-list" id="bus-list">
-                <div class="bus-item" data-from="Mumbai" data-to="Pune">Bus from Mumbai to Pune - 10:00 AM</div>
-                <div class="bus-item" data-from="Delhi" data-to="Jaipur">Bus from Delhi to Jaipur - 12:00 PM</div>
-                <div class="bus-item" data-from="Bangalore" data-to="Chennai">Bus from Bangalore to Chennai - 3:00 PM</div>
-                <div class="bus-item" data-from="Mumbai" data-to="Delhi">Bus from Mumbai to Delhi - 6:00 PM</div>
+        <div class="container d-flex align-items-center ">
+            <div class="bold text-dark m-3">Bus Ticket</div>
+            <div class="me-2">></div>
+            <div class="bus-list  mt-1 bg-light " id="bus-list">
+                <div class="bus-item m-2 bg-light p-0" data-from="Mumbai" data-to="Pune" style="color:gray">Bus from Mumbai to Pune - 10:00 AM</div>
+                <!-- <div class="bus-item me-3" data-from="Delhi" data-to="Jaipur">Bus from Delhi to Jaipur - 12:00 PM</div>
+                <div class="bus-item me-3" data-from="Bangalore" data-to="Chennai">Bus from Bangalore to Chennai - 3:00 PM</div>
+                <div class="bus-item me-3" data-from="Mumbai" data-to="Delhi">Bus from Mumbai to Delhi - 6:00 PM</div> -->
+            </div>
+            <div class="search-bar d-none ms-3 d-flex align-items-center">
+                <div class="border p-2 me-2">From: <%= from %></div>
+                <div class="border p-2 me-2">To: <%= to %></div>
+                <div class="btn btn-primary p-2">Search</div>
             </div>
         </div>
     </div>
 </div>
+<div class="bus-list m-3 bg-light " id="bus-list"> 
+    <h6 class="bus-item bg-light p-0 " data-from="Mumbai" data-to="Pune" >Bus from Mumbai to Pune - 10:00 AM</h6>
+    <!-- <div class="bus-item me-3" data-from="Delhi" data-to="Jaipur">Bus from Delhi to Jaipur - 12:00 PM</div>
+    <div class="bus-item me-3" data-from="Bangalore" data-to="Chennai">Bus from Bangalore to Chennai - 3:00 PM</div>
+    <div class="bus-item me-3" data-from="Mumbai" data-to="Delhi">Bus from Mumbai to Delhi - 6:00 PM</div> -->
+ </div> 
+<hr>
+
+<div class="container-fluid m-3 d-flex w-100" >
+   <h6  style=" width: 16%;" ><span style="margin-right: 1%;">Pune </span> <i class="bi bi-arrow-right "></i> <span style="margin-left: 1%;margin-right: 1%;">Mumbai</span>
+    <i class="bi bi-caret-left"></i> <span> 21 Mar</span> <i class="bi bi-caret-right " style="margin-right: 1%;" ></i> 
+   
+</h6> 
+<button class="modify-btn" style="border-radius: 5px; border: 1px solid blakc; margin-top: 0; width: 120px;">Modify</button>
+</div>
+<hr>
+
+
+<div class="container d-flex w-100">
+    <div class="bus-card">
+        <div class="bus-info">
+            <h2>Purple Bus - Metrolink</h2>
+            <p>Bharat Benz A/C Seater (2+2)</p>
+            <p class="discount">Exclusive discounts available for women passengers</p>
+        </div>
+        
+        <div class="bus-timing">
+            <div>
+                <strong>09:35</strong>
+                <p>Swargate</p>
+            </div>
+            <div class="duration">05h 10m</div>
+            <div>
+                <strong>14:45</strong>
+                <p>Andheri East</p>
+            </div>
+        </div>
+        
+   
+        <div class="bus-pricing mt-3">
+            <p>Starts from</p>
+            <h3 class="mt-1">INR 399</h3>
+
+            <div class="bus-offer ">
+                <i class="fas fa-tag"></i> <span>redDeal available</span>
+            </div>
+           
+        </div>
+
+      <div class="bus_seats"> <p class="seats">21 Seats available</p>
+        <p class="window-seats">8 Window</p></div>
+
+        <div class="bus-action">
+            <button class="view-seats">VIEW SEATS</button>
+        </div>
+    </div>
+
+</div>
+
+    
+
+<style> 
+   
+    .bus-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+    }
+
+    .bus-info {
+        flex: 2;
+    }
+
+    .bus-info h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .bus-info p {
+        font-size: 14px;
+        margin: 4px 0;
+    }
+
+    .discount {
+        color: red;
+    }
+
+    .bus-timing {
+        flex: 2;
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    .bus-timing strong {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .duration {
+        font-size: 14px;
+        color: gray;
+    }
+
+   
+
+    .rating {
+        background: green;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+    }
+
+    .rating i {
+        margin-right: 5px;
+    }
+
+    .bus-pricing {
+        flex: 1.5;
+        text-align: center;
+    }
+
+    .bus-pricing h3 {
+        margin: 0 0;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .seats, .window-seats {
+        font-size: 14px;
+        color: gray;
+    }
+
+    .bus-offer {
+     
+     float: left;
+        
+        color: red;
+        margin-left: 20%;
+    }
+
+    .bus-offer i {
+        margin-right: 5px;
+    }
+
+    .bus-action {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .view-seats {
+        background: red;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .view-seats:hover {
+        background: darkred;
+    }
+</style> 
 
 <script>
     $(document).ready(function() {

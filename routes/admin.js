@@ -6,16 +6,13 @@
 // var fs  =require("fs")
 // var exe = require("../connection")
 // const router = express.Router();
-// router.use(cors());
-// router.use(express.urlencoded({ extended: true }));
-
-
 var express = require("express");
 var exe = require("../connection");
 var router = express.Router();
 
 
-
+// router.use(cors());
+// router.use(express.urlencoded({ extended: true }));
 
 router.get("/",function(req,res){
     res.render("admin/login.ejs");
