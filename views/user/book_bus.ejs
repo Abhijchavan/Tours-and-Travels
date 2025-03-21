@@ -1,0 +1,33 @@
+<%- include("navbar.ejs"); %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+             <div class="search-bar d-none">
+                <input type="text" id="from" placeholder="From" value="<%= from %>">
+                <input type="text" id="to" placeholder="To" value="<%= to %>">
+                <button id="search">Search</button>
+            </div> 
+            <div class="bus-list" id="bus-list">
+                <div class="bus-item" data-from="Mumbai" data-to="Pune">Bus from Mumbai to Pune - 10:00 AM</div>
+                <div class="bus-item" data-from="Delhi" data-to="Jaipur">Bus from Delhi to Jaipur - 12:00 PM</div>
+                <div class="bus-item" data-from="Bangalore" data-to="Chennai">Bus from Bangalore to Chennai - 3:00 PM</div>
+                <div class="bus-item" data-from="Mumbai" data-to="Delhi">Bus from Mumbai to Delhi - 6:00 PM</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        var from = $("#from").val().toLowerCase();
+        var to = $("#to").val().toLowerCase();
+
+        $(".bus-item").hide();
+        $(".bus-item").filter(function() {
+            return $(this).data("from").toLowerCase() === from && $(this).data("to").toLowerCase() === to;
+        }).show();
+    });
+</script>
+
+<%- include("footer.ejs"); %>
