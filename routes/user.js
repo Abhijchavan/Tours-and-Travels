@@ -73,10 +73,10 @@ router.get('/signup',async (req,res)=>{
     res.render("user/signup.ejs")
 })
 
-router.get('/check_available_seat',async (req,res)=>{
+router.get('/user/check_available_seat', async (req, res) => {
+    res.render("user/check_available_seat.ejs");
+});
 
-    res.render("/user/check_available_seat.ejs")
-})
 
 router.get("/book_bus", async (req, res) => {
     const from = req.query.from || "";
