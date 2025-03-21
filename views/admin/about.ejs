@@ -1,0 +1,48 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+    <div class="col-12">
+    <p class="h3 mb-3"><strong>About</strong> Page Details</p>
+
+    <form action="about_details" method="post" class="about_form" enctype="multipart/form-data">
+            <h5>About page Description</h5>
+    <input type="text" name="about_description" class="form-control" placeholder="About Description" >
+    <br>
+    <h5>Upload About Page Image </h5>
+    <input type="file" class="form-control" name="about_img" >
+    <br>
+    <button class="btn btn-primary btn-lg"> Submit</button>
+    </form>
+</div></div>
+<table class="table table-striped table-hover mt-3 ">
+    <tr>
+        <th>About ID</th>
+        <th>About Description</th>
+             <th>About Image</th>
+             <th>Action</th>
+      
+        
+    </tr>
+    <% about_info.map(function(row, i) { %>
+        <tr>
+            <td><%= i+1 %></td>
+          
+            <td><%= row.about_description %></td>
+            <td><img src="/admin_assets/about/<%=row.about_img %>" width="20%"></td>
+            <td>
+                <a href="/admin/about_edit/<%= row.about_id %>" class="btn btn-primary">Edit</a>
+                <a href="/admin/about_delete/<%= row.about_id %>" class="btn btn-danger">Delete</a> 
+            </td>  
+    
+        </tr>
+    <% }) %>
+</table>
+<hr>
+
+</table>
+
+
+
+
+<%-include("footer.ejs"); %>
+
+ 
