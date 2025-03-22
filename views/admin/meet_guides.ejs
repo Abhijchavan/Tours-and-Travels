@@ -1,0 +1,32 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+    <div class="col-12">
+    <p class="h3 mb-3"><strong>About</strong> Page Details</p>
+
+    <form action="/guide_details" method="post"  enctype="multipart/form-data">
+<h5>
+    Name 
+</h5>
+<input type="text" name="guide_name" placeholder="Guide Name">
+<br>
+
+<h5>Designation</h5>
+<input type="text" name="designation" placeholder="Designation">
+<br>
+<h5>Guide Image</h5>
+<input type="file" name="guide_image" >
+<br>
+<h5>Facebook</h5>
+<input type="text" name="facebook" placeholder="Facebook Link">
+<br>
+<h5>Twitter</h5>
+<input type="text" name="twitter" placeholder="Twitter Link">
+<br>
+<h5>Facebook</h5>
+<input type="text" name="insta" placeholder="Instagram Link">
+<br>
+<button class="btn btn-primary btn-lg"> Submit</button>
+        </form>
+        </div>
+    </div>
+        <!-- CREATE TABLE guide(guide_id int primary key auto-increment,guide_name text,designation,guide_image,facebook,twitter,insta) -->

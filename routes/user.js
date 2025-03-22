@@ -19,12 +19,13 @@ router.get("/",async (req,res)=>{
 })
 
 
-router.get('/about',async (req,res)=>{
+router.get("/about",async function(req,res){
+    var about = await exe(`SELECT * FROM about`);
+    res.render("user/about.ejs",{about:about});
 
-    res.render("user/about.ejs")
-})
+});
+
 router.get('/services',async (req,res)=>{
-
     res.render("user/services.ejs")
 })
 router.get('/packages',async (req,res)=>{
