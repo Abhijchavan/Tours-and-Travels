@@ -1,0 +1,77 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+    <div class="col-12">
+    <p class="h3 mb-3"><strong>client_review</strong> Page Details</p>
+
+    <form action="client_details" method="post" class="services_form" enctype="multipart/form-data">
+    <h5>client image</h5>
+    <input type="file" name="_image" class="form-control">
+    <br>
+
+    <h5>client name</h5>
+    <input type="text" name="client_name" class="form-control">
+    <br>
+
+    <h5>client location</h5>
+    <input type="text" name="client_location" class="form-control">
+    <br>
+
+    <h5>client description</h5>
+    <textarea name="client_description" class="form-control" rows="4"></textarea>
+     <br>
+
+    <button class="btn btn-primary btn-lg"> Submit</button>
+    </form>
+
+
+<table class="table table-striped table-hover mt-3 ">
+    <tr>
+        <th> client Id</th>
+        <th>client image</th>
+      
+        <th>client name</th>
+    
+        <th>client location </th>
+       
+        <th>client description</th>
+        
+        <th>Action</th>
+    </tr>
+    <% services_info.map(function(row, i) { %>
+        <tr>
+            <td><%= i+1 %></td>
+          
+    
+            <td><img src="/admin_assets/services/<%=row.client_image %>" width="20%"></td>
+           
+            <td><%= row.client_name %></td>
+            
+            <td><%= row.client_location %></td>
+            
+            <td><%= row.client_description %></td>
+            
+            
+    
+    
+   
+
+<td>
+     <td>
+        <a href="/admin/contact_edit/<%= row.id %>" class="btn btn-primary">Edit</a>
+        <a href="/admin/contact_delete/<%= row.id %>" class="btn btn-danger" 
+           onclick="return confirm('Are you sure you want to delete this record?');">
+           Delete
+        </a>
+    </td> 
+    
+</td>   
+</tr>
+<% }) %>
+</table>
+<hr>
+</div></div>
+
+<%-include("footer.ejs"); %>
+
+
+
