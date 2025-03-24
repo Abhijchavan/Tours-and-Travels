@@ -1,0 +1,774 @@
+<%- include("navbar.ejs"); %>
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-center py-5">
+            
+        </div>
+    </div>
+
+</div>
+  <div class="container-fluid p-4  d-flex w-100 bg-light" >
+    <h6  style=" width: 16%;" ><span style="margin-right: 1%;">Pune </span> <i class="bi bi-arrow-right "></i> <span style="margin-left: 1%;margin-right: 1%;">Mumbai</span>
+     <i class="bi bi-caret-left"></i> <span> 21 Mar</span> <i class="bi bi-caret-right " style="margin-right: 1%;" ></i> 
+    
+ </h6> 
+ <button class="modify-btn" style="border-radius: 5px; border: 1px solid blakc; margin-top: 0; width: 120px;">Modify</button>
+ </div>
+
+ <div class="row d-flex bg-light p-4">
+ <div class="col-5 container-fluid "  style="margin-left: 6%; margin-right: 0;">
+    <div class="container">
+        <h5 style="background-color: #dde1ff; width: 560px; padding: 10px; font-size: 19px;">Click on an Available seat to proceed with your transaction.</h5>
+        <div style="background-color: rgb(213, 212, 212); width: 550px; height: 270px; display: flex; border-left:5px solid red; ">
+           
+            <div class="d-flex">
+                <img src="/user_assests/img/gear_11566243.png" alt="" style="border-radius: 50%; width: 35px; height: 35px; margin-top: 25px;margin-left: 5px;">
+            </div>
+            <div class="bus-layout d-flex">
+                <div class="bus-container">
+                    <a href="/user/select_destination"><div class="seat available">A1</div></a>
+                    <a href="/user/select_destination"><div class="seat female">A2</div></a>
+                    <a href="/user/select_destination"><div class="seat available">A3</div></a>
+                    <a href="/user/select_destination"><div class="seat unavailable">A3</div></a>
+                    <a href="/user/select_destination"><div class="seat unavailable">A4</div></a>
+                    <a href="/user/select_destination"><div class="seat male">A4</div></a>
+                    <a href="/user/select_destination"><div class="seat available">A4</div></a>
+                    <a href="/user/select_destination"><div class="seat unavailable">A4</div></a>
+                
+                    <!-- Second row (2 seats) -->
+                    <a href="/user/select_destination"><div class="seat unavailable">B1</div></a>
+                    <a href="/user/select_destination"><div class="seat available">B2</div></a>
+                    <a href="/user/select_destination"><div class="seat male">A3</div></a>
+                    <a href="/user/select_destination"><div class="seat female">B3</div></a>
+                    <a href="/user/select_destination"><div class="seat female">B4</div></a>
+                    <a href="/user/select_destination"><div class="seat unavailable">B4</div></a>
+                    <a href="/user/select_destination"><div class="seat male">A4</div></a>
+                    <a href="/user/select_destination"><div class="seat available">A4</div></a>
+                
+                    <!-- Empty row (Aisle space) -->
+                    <div class="aisle"></div>
+                    <div class="aisle"></div>
+                    <div class="aisle"></div>
+                    <div class="aisle"></div>
+                    <div class="aisle"></div>
+                    <div class="aisle"></div>
+                    <div class="aisle"></div>
+                    <div class="aisle"></div>
+                
+                    <!-- Third row (2 seats) -->
+                    <a href="/user/select_destination"><div class="seat unavailable">C1</div></a>
+                    <a href="/user/select_destination"><div class="seat unavailable">C2</div></a>
+                    <a href="/user/select_destination"><div class="seat available">A3</div></a>
+                    <a href="/user/select_destination"><div class="seat male">C3</div></a>
+                    <a href="/user/select_destination"><div class="seat available">C4</div></a>
+                    <a href="/user/select_destination"><div class="seat female">B4</div></a>
+                    <a href="/user/select_destination"><div class="seat male">A4</div></a>
+                    <a href="/user/select_destination"><div class="seat available">A4</div></a>
+                </div>
+                
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-4  container-fluid " style=" margin-left: 3%;">
+         <h6 style="margin-bottom: 15px;"><strong>This booking is non-refundable</strong></h6>  
+         <p>This booking falls under the 100% cancellation charges window of the cancellation policy</p>
+         <div class="confirmation-container">
+            <div class="header">
+                <h2>Boarding & Dropping</h2>
+                <a href="/user/select_destination" class="change-link">CHANGE</a>
+            </div>
+        
+            <div class="details">
+                <div class="stop">
+                    <div class="dot"></div>
+                    <div class="info">
+                        <p class="title">Nashik Phata Ishwar Travels</p>
+                        <p class="subtitle">Nashik Phata Ishwar Travels</p>
+                    </div>
+                    <span class="time">20:10</span>
+                </div>
+        
+                <div class="stop">
+                    <div class="dot"></div>
+                    <div class="info">
+                        <p class="title">Kalamboli (W) Opp. Mc Donald</p>
+                        <p class="subtitle">Kalamboli (W) NEAR UNDER PUBLIC BRIDGE MC DONALD</p>
+                    </div>
+                    <span class="time">22:40</span>
+                </div>
+            </div>
+        
+            <hr>
+        
+            <div class="seat-info">
+                <p><strong>Seat No.</strong></p>
+                <p>8</p>
+            </div>
+        
+            <hr>
+        
+            <div class="fare-details">
+                <p><strong>Fare Details</strong></p>
+                <div class="amount">
+                    <p>Amount</p>
+                    <p class="price"><strong>INR 475.00</strong></p>
+                </div>
+                <p class="tax-note">Taxes will be calculated during payment</p>
+         
+            </div>
+        
+            <button  class="open-modal-btn book-btn" onclick="openModal()">PROCEED TO BOOK</button>
+        </div>
+        
+    </div>
+</div>
+</div>
+
+<div id="passengerModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <h2 class="passenger-title " style="text-align: center;">Passenger Details</h2>
+        <span><i class="bi bi-person-circle" style=" padding: 5px;"></i> <strong>Passenger Information</strong></span>
+        <div class="passenger-information">
+           <span style=" font-size: 13.5px;">Passenger 1 |
+            Seat 21
+            This seat is reserved for Male Passenger
+            </span>
+            <form action="" class="col-12">
+                <label for="name">Name</label><br>
+                <input type="text" placeholder="Name " class="col-12">
+            
+                <span>
+                    <label for="" class="col-6">Gender</label>
+                    <label for="">Age</label>
+                </span><br>
+               
+                <span>
+                    <input type="radio"  >male
+                    <input type="radio"  >female
+                    <input type="text" name="" id="" class="" style="margin-left: 70px;">
+                </span>
+                <label for="">State of Residence</label><br>
+                <input type="text" placeholder="State of Residence" class="col-12">
+            </form>
+        </div>
+      
+        <span style="margin-top: 20px;">  <i class="bi bi-telephone " style="padding: 5px;"></i><strong>Contact Details</strong></span>
+        <div class="Contact-information ">
+            <span style=" font-size: 15px; background-color: yellow; width: 100%;">
+                Your ticket will be sent to these details
+             </span>
+             <form action="" class="col-12">
+                 <label for="email">Email</label><br>
+                 <input type="email" placeholder="email " class="col-12">
+                
+          
+                 <label for="phone">Phone</label><br>
+                    <input type="number" placeholder="Phone NO " class="col-12">
+               
+                
+             </form>
+           
+         </div>
+        <div class="option mt-3">
+            <input type="radio" id="cancellation"  name="addcancellation"  >Add Free Cancellation
+           
+            <input type="radio" id="no-cancellation" name="cancellation"  >Don't add Free Cancellation
+           
+        </div>
+
+        <a href="#" class="tnc-link">T&C Apply</a>
+
+        <div class="insurance-section">
+            <h3>redBus Assurance</h3>
+            <p>Secure your trip just at <span class="price">₹23</span> per passenger</p>
+
+            <div class="insurance-options">
+                <div class="insurance-card">
+                    <img src="/user_assests/img/kashmir-1.jpg" alt="Refund">
+                    <h4>Up to ₹500 Extra refund</h4>
+                    <p>In case your bus gets cancelled.</p>
+                </div>
+                <div class="insurance-card">
+                    <img src="/user_assests/img/kashmir-1.jpg" alt="Insurance">
+                    <h4>Insurance Coverage</h4>
+                    <p>Up to ₹75,000 on hospitalization & Up to ₹5 Lakh in case of death/PTD/PPD</p>
+                </div>
+            </div>
+
+            <div >
+                <input type="radio" id="insurance-yes" name="insurance">
+                <label for="insurance-yes">Yes, Protect my trip at <span class="price">₹23</span> (1 passenger), I agree to the <a href="#" class="tnc-bold">Terms and Conditions</a></label>
+            </div>
+
+            <div >
+                <input type="radio" id="insurance-no" name="insurance" checked>
+                <label for="insurance-no">Don't add redBus Assurance</label>
+            </div>
+        </div>
+
+     
+
+        <p class="disclaimer">
+            By clicking on proceed, I agree that I have read and understood the <a href="#" class="tnc-link">TnCs</a> and the <a href="#" class="tnc-link">Privacy Policy</a>
+        </p>
+
+        <div class="total">
+            <p><strong>Total Amount :</strong> <span class="price">INR 475.00</span></p>
+            <p class="note">(*Exclusive of Taxes)</p>
+        </div>
+
+        <button class="pay-btn">PROCEED TO PAY</button>
+    </div>
+</div>
+
+<script >// Function to Open Modal
+// Function to Open Modal
+function openModal() {
+    document.getElementById("passengerModal").style.display = "flex";
+    document.body.classList.add("modal-open"); // Prevents page scroll
+}
+
+// Function to Close Modal
+function closeModal() {
+    document.getElementById("passengerModal").style.display = "none";
+    document.body.classList.remove("modal-open"); // Restores page scroll
+}
+
+// Close Modal when clicking outside of it
+window.onclick = function(event) {
+    let modal = document.getElementById("passengerModal");
+    if (event.target == modal) {
+        closeModal();
+    }
+};
+
+// Close Modal with Esc Key
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+});
+
+    </script>
+    <style>
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: black;
+    background:rgb(225, 225, 225); 
+    backdrop-filter: blur(5px);
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+    transition: opacity 0.3s ease-in-out;
+    overflow: hidden; /* Prevents scrolling on the page */
+}
+
+.passenger-information, .option, .Contact-information {
+    width: 100%;
+    max-width: 455px;  
+    border-radius: 12px;
+    margin-top: 10px;
+   
+    height: auto;
+    padding: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+.passenger-information label, .Contact-information label {
+    font-size: 14px;
+    padding: 5px;
+}
+.passenger-information input, .Contact-information input{
+ border-radius: 10px; 
+ border: 1px solid gray;
+ font-size: 13px;
+}
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.2); /* Transparent Glass Effect */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+    /* MAKE MODAL SCROLLABLE */
+    max-height: 80vh; /* Limits height to 80% of viewport */
+    overflow-y: auto; /* Enables scrolling INSIDE modal */
+}
+
+/* === HIDE PAGE SCROLL WHEN MODAL IS OPEN === */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* === CLOSE BUTTON === */
+.close {
+    position: absolute;
+  right: 20px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+
+    padding: 5px 10px;
+  
+
+}
+
+/* === FADE-IN ANIMATION === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === MAKE SURE SCROLLBAR ONLY APPLIES TO MODAL === */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* === RESPONSIVE FIXES === */
+@media (max-width: 500px) {
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .close {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+
+.option {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.option input {
+    margin-right: 10px;
+}
+
+.tnc-link {
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    margin-top: 5px;
+}
+
+.insurance-section h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.price {
+    color: red;
+    font-weight: bold;
+}
+
+.insurance-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.insurance-card {
+    width: 48%;
+    text-align: center;
+    padding: 10px;
+}
+
+.insurance-card img {
+    width: 40px;
+    margin-bottom: 8px;
+}
+
+.insurance-card h4 {
+    color: green;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.insurance-card p {
+    font-size: 12px;
+    color: gray;
+}
+
+
+.pay-btn {
+    width: 100%;
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.pay-btn:hover {
+    background: #c9302c;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+.passenger-container {
+    width: 500px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.passenger-title {
+    font-size: 18px;
+    font-weight: bold;
+    background: blue;
+    color: white;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.option input {
+    margin-right: 10px;
+}
+
+.tnc-link {
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    margin-top: 5px;
+}
+
+.insurance-section h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.price {
+    color: red;
+    font-weight: bold;
+}
+
+.insurance-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.insurance-card {
+    width: 48%;
+    text-align: center;
+    padding: 10px;
+}
+
+.insurance-card img {
+    width: 40px;
+    margin-bottom: 8px;
+}
+
+.insurance-card h4 {
+    color: green;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.insurance-card p {
+    font-size: 12px;
+    color: gray;
+}
+
+.tnc-bold {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.donation-section {
+    background: #fff3cd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.donation-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.know-more {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+.disclaimer {
+    font-size: 12px;
+    color: gray;
+    margin-top: 15px;
+}
+
+.total {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.note {
+    font-size: 12px;
+    color: gray;
+}
+
+.pay-btn {
+    width: 100%;
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.pay-btn:hover {
+    background: #c9302c;
+}
+     .confirmation-container {
+    width: 550px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.change-link {
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.details {
+    margin-top: 10px;
+}
+
+.stop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: black;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.info {
+    flex: 1;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: gray;
+}
+
+.time {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+.seat-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.fare-details {
+    margin-top: 10px;
+}
+
+.amount {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    font-size: 16px;
+    color: black;
+}
+
+.tax-note {
+    font-size: 12px;
+    color: gray;
+}
+
+.fare-link {
+    color: red;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.book-btn {
+    width: 100%;
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.book-btn:hover {
+    background: #c9302c;
+}
+        /* .bus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            margin-left: 20px;
+        } */
+
+        .driver-seat {
+            background: black;
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .bus-container {
+     
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            margin-left: 5px;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr) ;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .aisle {
+            width: 40px;
+            height: 30px;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .available { background: rgb(235, 255, 222); color:black;border: 2px solid rgb(235, 255, 222); }
+        .male { background-color: rgb(198, 240, 255); color:black; }
+        .female { background: rgb(255, 217, 223); color:black; }
+        .unavailable { background:white;background-color: rgb(255, 79, 79); color:black; cursor: not-allowed; }
+        .available:hover,  .male:hover,  .female:hover { border:3px solid #45a049; }
+       
+
+
+    </style>
+<script>$(document).ready(() => {
+    $(".seat.available, .seat.female, .seat.male").click(function() {
+        $(this).toggleClass("selected").css("background-color", $(this).hasClass("selected") ? "green" : "");
+    });
+});
+
+
+</script>
+</body>
+</html>
+
+<%- include("footer.ejs"); %>
