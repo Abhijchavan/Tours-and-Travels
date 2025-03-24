@@ -67,13 +67,31 @@ var sql=`INSERT INTO about(about_description,about_img)VALUES('${d.about_descrip
 var data=await exe(sql);
 res.redirect("/admin/about");  
 });
+
 router.get("/about_delete/:id",async function (req,res) {
    
     let aboutId = req.params.id;
     let sql = `DELETE FROM about WHERE about_id = ${aboutId}`;
     await exe(sql);
     res.redirect("/admin/about");
-})
+});
+
+router.get("/meet_guides",async function(row,i){
+res.render("/admin/meet_guides.ejs")
+});
+
+router.post("/guide_details", async function(req,res){
+    
+
+    if(req.files){
+        var guide_image=new Date().getTime()+req.files.guide_image.name;
+        req.files.guide_image.mv("public/admin_assets/about/"+guide_image);
+            }
+        var d=req.body;
+        var sql=`INSERT INTO guide(guide_name,designation,guide_image,facebook,twitter,insta)VALUES('${d.guide_name}','${d.designation}','${guide_image}','${d.facebook}','${d.twitter}','${d.insta}')`;
+        var data=await exe(sql);
+        res.redirect("/admin/meet_guides"); 
+    });
 
 //contact page
 router.get("/contact", async function(req, res) {
