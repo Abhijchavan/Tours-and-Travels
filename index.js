@@ -1,38 +1,38 @@
-var express = require("express")
-var upload = require("express-fileupload")
-var bodyparser = require("body-parser")
-var path = require('path')
+const express = require("express");
+const upload = require("express-fileupload");
+const bodyparser = require("body-parser");
+const path = require('path');
+const session = require("express-session");
+const fs = require('fs');
+const cors = require('cors');
 
-let session  = require("express-session")
-let fs = require('fs')
+let app = express();
+app.use(cors());
 
-let app  = express();
-const cors = require('cors')
-app.use(cors())
-
-app.use(express.static(path.join(__dirname,'public')));
-
-app.use(express.json())
+// Static Files
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use('/aos', express.static(path.join(__dirname, 'node_modules/aos/dist')));
 
+// Middleware
+app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(upload());
+
+// Session Middleware (Ensure it's applied globally)
 app.use(session({
-    secret:"sahil",
-    resave:false,
-    saveUninitialized:true
+    secret: "sahil",
+    resave: false,
+    saveUninitialized: true
 }));
 
-app.use(upload())
+// Routes
+let admin = require('./routes/admin');
+let user = require('./routes/user');
 
-app.use(bodyparser.urlencoded({extended:true}));
+app.use('/admin', admin);
+app.use('/', user);
 
-
-let admin = require('./routes/admin')
-let user = require('./routes/user')
-
-app.use('/admin',admin)
-app.use('/',user)
-
-app.listen(3000,()=>{
-    console.log('server is running on Port 3000')
-})
+app.listen(3000, () => {
+    console.log('Server is running on Port 3000');
+});
