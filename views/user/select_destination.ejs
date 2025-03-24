@@ -1,0 +1,333 @@
+<%- include("navbar.ejs"); %>
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-center py-5">
+            
+
+
+
+
+            
+        </div>
+    </div>
+
+</div>
+  <div class="container-fluid p-4  d-flex w-100 bg-light" >
+    <h6  style=" width: 16%;" ><span style="margin-right: 1%;">Pune </span> <i class="bi bi-arrow-right "></i> <span style="margin-left: 1%;margin-right: 1%;">Mumbai</span>
+     <i class="bi bi-caret-left"></i> <span> 21 Mar</span> <i class="bi bi-caret-right " style="margin-right: 1%;" ></i> 
+    
+ </h6> 
+ <button class="modify-btn" style="border-radius: 5px; border: 1px solid blakc; margin-top: 0; width: 120px;">Modify</button>
+ </div>
+
+ <div class="row d-flex bg-light p-5">
+ <div class="col-5 container-fluid "  style="margin-left: 10%; margin-right: 0;">
+    <div class="container">
+        <h5 style="background-color: #dde1ff; width: 560px; padding: 10px; font-size: 19px;">Click on an Available seat to proceed with your transaction.</h5>
+        <div style="background-color: rgb(213, 212, 212); width: 550px; height: 270px; display: flex; border-left:5px solid red; ">
+           
+            <div class="d-flex">
+                <img src="/user_assests/img/gear_11566243.png" alt="" style="border-radius: 50%; width: 35px; height: 35px; margin-top: 25px;margin-left: 5px;">
+            </div>
+            <div class="bus-layout d-flex">
+               
+                <div class="bus-container" >
+                  
+                    
+                    <div class="seat available">A1</div>
+                        <div class="seat female">A2</div>
+                        <div class="seat available">A3</div>
+                        <div class="seat unavailable">A3</div>
+                        <div class="seat unavailable">A4</div>
+                        <div class="seat male">A4</div>
+                        <div class="seat available">A4</div>
+                        <div class="seat unavailable">A4</div>
+                
+                        <!-- Second row (2 seats) -->
+                        <div class="seat unavailable">B1</div>
+                        <div class="seat available">B2</div>
+                        <div class="seat male">A3</div>
+                        <div class="seat female">B3</div>
+                        <div class="seat female">B4</div>
+                        <div class="seat unavailable">B4</div>
+                        <div class="seat male">A4</div>
+                        <div class="seat available">A4</div>
+                
+                        <!-- Empty row (Aisle space) -->
+                        <div class="aisle"></div>
+                        <div class="aisle"></div>
+                        <div class="aisle"></div>
+                        <div class="aisle"></div>
+                        <div class="aisle"></div>
+                       
+                        <div class="aisle"></div>
+                        <div class="aisle"></div>
+                        <div class="aisle"></div>
+                
+                        <!-- Third row (2 seats) -->
+                        <div class="seat unavailable">C1</div>
+                        <div class="seat unavailable">C2</div>
+                        <div class="seat available">A3</div>
+                        <div class="seat male">C3</div>
+                        <div class="seat available">C4</div>
+                        <div class="seat female">B4</div>
+                        <div class="seat male">A4</div>
+                        <div class="seat available">A4</div>
+                
+                
+                  
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-3  container-fluid " style=" margin-left: 2%; ">
+   
+<style>.popup-container {
+    background: white;
+    width: 600px;
+    height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding: 20px;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.close-icon {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popup-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.tab-item {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-item.active {
+    color: red;
+    border-bottom: 2px solid red;
+}
+
+.popup-body {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.option-list {
+    margin-top: 10px;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.option-item input {
+    margin-right: 10px;
+}
+
+.time-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    margin-right: 10px;
+}
+
+.location-details {
+    color: #666;
+    font-size: 14px;
+}
+
+.price-section {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.price-amount {
+    color: black;
+    font-size: 16px;
+}
+</style>
+<div class="popup-container">
+    <div class="popup-header">
+        <h2>Select the Boarding & Dropping Point</h2>
+      
+    </div>
+
+    <div class="popup-tabs">
+        <div class="tab-item active" id="boarding-tab" onclick="showSection('boarding')">BOARDING POINT</div>
+        <div class="tab-item" id="dropping-tab" onclick="showSection('dropping')">DROPPING POINT</div>
+    </div>
+
+    <div id="boarding-section" class="popup-body">
+        <div class="section-title">Boarding Point</div>
+        <div class="option-list">
+            <label class="option-item" required>
+                <input type="radio" name="boarding" value="pashan">
+                <span class="location-details">
+                    <strong>Pashan</strong><br>
+                    Near Audi Showroom, Bangalore-Mumbai
+                </span>
+            </label>
+
+            <label class="option-item">
+                <input type="radio" name="boarding" value="balewadi">
+                <span class="location-details">
+                    <strong>Balewadi</strong><br>
+                    Near Orchid Hotel And Balewadi Stadium
+                </span>
+            </label>
+        </div>
+      
+    <div class="price-section">
+        <span class="price-text">Amount <small>(Taxes will be calculated during payment)</small></span>
+        <span class="price-amount">INR 259.00</span>
+    </div>
+    </div>
+
+    <div id="dropping-section" class="popup-body" style="display: none;" >
+        <div class="section-title">Dropping Point</div>
+        <div class="option-list" required>
+            <label class="option-item">
+                <input type="radio" name="dropping" value="shivajinagar">
+                <span class="location-details">
+                    <strong>Shivajinagar</strong><br>
+                    Near Shivajinagar Bus Stand
+                </span>
+            </label>
+
+            <label class="option-item">
+                <input type="radio" name="dropping" value="hadapsar">
+                <span class="location-details">
+                    <strong>Hadapsar</strong><br>
+                    Near Hadapsar Bus Stand
+                </span>
+            </label>
+        </div>
+        
+        <a href="/user/conformation"><button class="submit-btn" style="border: none; padding: 3px; background-color: red; border-radius: 5px; margin-top: 10px; margin-left: 85%;">Submit</button></a>
+    </div>
+
+</div>
+
+<script>
+    function showSection(section) {
+        document.getElementById('boarding-section').style.display = section === 'boarding' ? 'block' : 'none';
+        document.getElementById('dropping-section').style.display = section === 'dropping' ? 'block' : 'none';
+        
+        document.getElementById('boarding-tab').classList.toggle('active', section === 'boarding');
+        document.getElementById('dropping-tab').classList.toggle('active', section === 'dropping');
+    }
+
+</script>
+    
+    </div>
+</div>
+
+
+    <style>
+        /* .bus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            margin-left: 20px;
+        } */
+
+        .driver-seat {
+            background: black;
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .bus-container {
+     
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            margin-left: 5px;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr) ;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .aisle {
+            width: 40px;
+            height: 30px;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .available { background: rgb(235, 255, 222); color:black;border: 2px solid rgb(235, 255, 222); }
+        .male { background-color: rgb(198, 240, 255); color:black; }
+        .female { background: rgb(255, 217, 223); color:black; }
+        .unavailable { background:white;background-color: rgb(255, 79, 79); color:black; cursor: not-allowed; }
+        .available:hover,  .male:hover,  .female:hover { border:3px solid #45a049; }
+       
+
+
+    </style>
+<script>$(document).ready(() => {
+    $(".seat.available, .seat.female, .seat.male").click(function() {
+        $(this).toggleClass("selected").css("background-color", $(this).hasClass("selected") ? "green" : "");
+    });
+});
+
+
+</script>
+</body>
+</html>
+
+<%- include("footer.ejs"); %>
