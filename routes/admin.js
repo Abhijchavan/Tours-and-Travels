@@ -269,6 +269,154 @@ router.get("/dashboard",function(req,res){
 });
 
 
+router.get("/package_slider",async function(req,res){
+    var data = await exe(`SELECT * FROM package_slider`);
+    var obj = {"package_slider":data};
+    res.render("admin/package_slider.ejs",obj);
+});
 
+router.post("/save_package_slider",async function(req,res){
+    var slider_image1 = "";
+    var slider_image2 = "";
+    var slider_image3 = "";
+
+    if(req.files){
+        if(req.files.slider_image1){
+            slider_image1 = new Date().getTime()+req.files.slider_image1.name;
+            req.files.slider_image1.mv("public/admin_assets/package_img/"+slider_image1);
+        }
+        if(req.files.slider_image2){
+            slider_image2 = new Date().getTime()+req.files.slider_image2.name;
+            req.files.slider_image2.mv("public/admin_assets/package_img/"+slider_image2);
+        }
+        if(req.files.slider_image3){
+            slider_image3 = new Date().getTime()+req.files.slider_image3.name;
+            req.files.slider_image3.mv("public/admin_assets/package_img/"+slider_image3);
+        }
+    }
+
+    var sql = `INSERT INTO package_slider (slider_image1,slider_image2,slider_image3) VALUES (?,?,?)`;
+
+    var data = await exe (sql,[slider_image1,slider_image2,slider_image3]);
+
+    res.redirect("/admin/package_slider");
+});
+
+router.get("/delete_package_slider/:id", async function (req, res) {
+    var package_slider_id = req.params.id;
+
+    var sql = `DELETE FROM package_slider WHERE package_slider_id = '${package_slider_id}'`;
+    var data =await exe(sql);
+
+    res.redirect("/admin/package_slider");
+});
+
+router.get("/edit_package_slider/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = "SELECT * FROM package_slider WHERE package_slider_id = ?";
+    var result = await exe(sql, [id]);
+
+    res.render("admin/edit_package_slider.ejs", { package_slider:result[0] });
+});
+
+
+router.post("/update_package_slider", async function (req, res) {
+    const { package_slider_id } = req.body;
+
+    let slider_image1 = null;
+    let slider_image2 = null;
+    let slider_image3 = null;
+
+    // Check if a file was uploaded
+    if (req.files && req.files.slider_image1) {
+        slider_image1 = new Date().getTime() + "-" + req.files.slider_image1.name;
+        await req.files.slider_image1.mv("public/admin_assets/package_img/" + slider_image1); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT slider_image1 FROM package_slider WHERE package_slider_id = ?", [package_slider_id]);
+        slider_image1 = oldData[0].slider_image1;
+    }
+
+     // Check if a file was uploaded
+     if (req.files && req.files.slider_image2) {
+        slider_image2 = new Date().getTime() + "-" + req.files.slider_image2.name;
+        await req.files.slider_image2.mv("public/admin_assets/package_img/" + slider_image2); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT slider_image2 FROM package_slider WHERE package_slider_id = ?", [package_slider_id]);
+        slider_image2 = oldData[0].slider_image2;
+    }
+
+    // Check if a file was uploaded
+    if (req.files && req.files.slider_image3) {
+        slider_image3 = new Date().getTime() + "-" + req.files.slider_image3.name;
+        await req.files.slider_image3.mv("public/admin_assets/package_img/" + slider_image3); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT slider_image3 FROM package_slider WHERE package_slider_id = ?", [package_slider_id]);
+        slider_image3 = oldData[0].slider_image3;
+    }
+
+    const sql = `UPDATE package_slider 
+                 SET slider_image1 = ?, slider_image2 = ?, slider_image3 = ?  WHERE package_slider_id = ?`;
+    const values = [ slider_image1, slider_image2, slider_image3, package_slider_id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/package_slider");
+});
+
+
+
+router.get("/package_details",async function(req,res){
+    var data = await exe(`SELECT * FROM package_details`);
+    var obj = {"package_details":data};
+    res.render("admin/package_details.ejs",obj);
+});
+
+router.post("/save_package_details",async function(req,res){
+
+    var sql = `INSERT INTO package_details(package_location,package_days,package_person,package_price,package_desc) VALUES (?,?,?,?,?)`;
+
+    var d = req.body;
+    var data = await exe (sql,[d.package_location,d.package_days,d.package_person,d.package_price,d.package_desc]);
+
+    res.redirect("/admin/package_details");
+
+});
+
+router.get("/delete_package_details/:id", async function (req, res) {
+    var package_details_id = req.params.id;
+
+    var sql = `DELETE FROM package_details WHERE package_details_id = '${package_details_id}'`;
+    var data =await exe(sql);
+
+    res.redirect("/admin/package_details");
+});
+
+
+router.get("/edit_package_details/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = "SELECT * FROM package_details WHERE package_details_id = ?";
+    var result = await exe(sql, [id]);
+
+    res.render("admin/edit_package_details.ejs", { package_details:result[0] });
+});
+
+router.post("/update_package_details", async function (req, res) {
+    const { package_details_id, package_location, package_days, package_person, package_price, package_desc } = req.body;
+
+    // SQL Update Query
+    const sql = `UPDATE package_details 
+                 SET package_location = ?, package_days = ?, package_person = ?, package_price = ?, package_desc = ?  
+                 WHERE package_details_id = ?`;
+    const values = [package_location, package_days, package_person, package_price, package_desc, package_details_id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/package_details");
+});
 
 module.exports = router;

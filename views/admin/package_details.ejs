@@ -1,0 +1,88 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+	<div class="col-12">
+		<h1>Tours And Travels</h1>
+			<form action="/admin/save_package_details" method="post" enctype="multipart/form-data">
+				<div>
+					<h1 class=" text-center p-3">Package details</h1>
+					<div class="row">
+						<div class="col-md-4 mb-3">
+							Location
+							<input type="text" name="package_location" class="form-control">    
+						</div>
+						<div class="col-md-4 mb-3">
+							days
+							<input type="number" name="package_days" class="form-control">   
+						</div>
+						<div class="col-md-4 mb-3">
+							person
+							<input type="number" name="package_person" class="form-control"> 
+						</div>
+                        <div class="col-md-4 mb-3">
+							price
+							<input type="number" name="package_price" class="form-control"> 
+						</div>
+                        <div class="col-md-4 mb-3">
+							Description
+                            <textarea name="package_desc" class="form-control"></textarea> 
+						</div>
+                        <div class="col-md-12 mb-3" class="text-center">
+							<button class="btn btn-lg btn-primary" type="submit">Save Slider</button>   
+						</div>
+		</form>
+		
+
+
+<!-- CREATE TABLE package_details(
+	package_details_id INT PRIMARY KEY AUTO_INCREMENT,
+	package_location TEXT,
+	package_days TEXT,
+	package_person TEXT,
+	package_price TEXT,
+	package_desc TEXT
+) -->
+
+
+<br>
+<div class="container  p-4 ">
+    <h1 class=" text-center p-3">Package Desc List</h1> 
+        <div class="row">
+            <div class="col-md-12">
+<table class="table table-bordered table-sm ">
+    <tr>
+        <th>Action</th>
+        <th>Sr.No</th>
+        <th>P_Location</th>
+        <th>P_Days</th>
+        <th>P_Person</th>
+        <th>P_Price</th>
+        <th>P_Desc</th>
+    </tr>
+
+    <% package_details.map((row,i)=>{ %>
+        <tr>
+            <td>
+                    <a href="/admin/edit_package_details/<%-row.package_details_id %>" class="btn btn-primary">
+                        edit
+                    </a>
+                
+                    <a href="/admin/delete_package_details/<%-row.package_details_id %>" class="btn btn-danger" onclick="return confirm('Are You Sure...')">
+                        delete
+                    </a>
+            </td>
+            <td><%- i+1 %></td>
+            <td><%- row.package_location %></td>
+            <td><%- row.package_days %></td>
+            <td><%- row.package_person %></td>
+            <td><%- row.package_price %></td>
+            <td><%- row.package_desc %></td>
+        </tr>
+        <% }) %>
+</table>
+</div>
+</div>
+</div>
+
+</div>			
+</div>			
+<%-include("footer.ejs"); %>		

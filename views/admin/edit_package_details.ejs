@@ -1,0 +1,42 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+<div class="col-12">
+	<h1>About page of City care Hospital</h1>
+			<form action="/admin/update_package_details" method="post" enctype="multipart/form-data">
+				<div class="container">
+					<h1 class="text-center p-3"> Package Details</h1>
+					<div class="row">
+                        <div class="col-md-12 mb-3" >
+                            <input type="hidden" name="package_details_id" class="form-control" value="<%- package_details.package_details_id %>">
+                        </div>
+						<div class="col-md-4 mb-3">
+							Location
+							<input type="text" name="package_location" class="form-control" value="<%- package_details.package_location %>">    
+						</div>
+						<div class="col-md-4 mb-3">
+							days
+							<input type="number" name="package_days" class="form-control" value="<%- package_details.package_days %>">   
+						</div>
+						<div class="col-md-4 mb-3">
+							person
+							<input type="number" name="package_person" class="form-control" value="<%- package_details.package_person %>"> 
+						</div>
+                        <div class="col-md-4 mb-3">
+							price
+							<input type="number" name="package_price" class="form-control" value="<%- package_details.package_price %>"> 
+						</div>
+                        <div class="col-md-4 mb-3">
+							Description
+                            <textarea name="package_desc" class="form-control"><%- package_details.package_desc %></textarea> 
+						</div>
+                        
+                        <div class="col-md-12 mb-3 text-center ">
+							<button class="btn  btn-primary">Update Details</button>  
+						</div>
+                    </div>
+                </div>
+            </form>
+    </div>
+</div>
+
+<%-include("footer.ejs"); %>
