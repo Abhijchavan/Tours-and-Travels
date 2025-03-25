@@ -1,4 +1,3 @@
-
 // var express = require("express")
 // var cors = require("cors")
 // var session = require('express-session')
@@ -27,11 +26,13 @@ function checkAdminAuth(req, res, next) {
 
 
 // Process login
-router.post("/login", checkAdminAuth ,async function (req, res) {
+
+// Process login
+router.post("/login" ,async function (req, res) {
     var { user_name, user_password } = req.body; 
 
     try {
-        var sql = `SELECT * FROM login WHERE user_name = 'admin123@gmail.com' AND user_password = 'admin';`;
+        var sql =` SELECT * FROM login WHERE user_name = 'admin123@gmail.com' AND user_password = 'admin'`;
         var data = await exe(sql, [user_name, user_password]);  
 
         if (data.length > 0) {
@@ -47,7 +48,7 @@ router.post("/login", checkAdminAuth ,async function (req, res) {
     } catch (err) {
         console.error("Database error:", err);
         res.status(500).send("Internal Server Error");
-    }
+    }
 });
 router.get("/about", async function(req, res) {
    
@@ -80,18 +81,18 @@ router.get("/meet_guides",async function(row,i){
 res.render("/admin/meet_guides.ejs")
 });
 
-router.post("/guide_details", async function(req,res){
+// router.post("/guide_details", async function(req,res){
     
 
-    if(req.files){
-        var guide_image=new Date().getTime()+req.files.guide_image.name;
-        req.files.guide_image.mv("public/admin_assets/about/"+guide_image);
-            }
-        var d=req.body;
-        var sql=`INSERT INTO guide(guide_name,designation,guide_image,facebook,twitter,insta)VALUES('${d.guide_name}','${d.designation}','${guide_image}','${d.facebook}','${d.twitter}','${d.insta}')`;
-        var data=await exe(sql);
-        res.redirect("/admin/meet_guides"); 
-    });
+//     if(req.files){
+//         var guide_image=new Date().getTime()+req.files.guide_image.name;
+//         req.files.guide_image.mv("public/admin_assets/about/"+guide_image);
+//             }
+//         var d=req.body;
+//         var sql=INSERT INTO guide(guide_name,designation,guide_image,facebook,twitter,insta)VALUES('${d.guide_name}','${d.designation}','${guide_image}','${d.facebook}','${d.twitter}','${d.insta}');
+//         var data=await exe(sql);
+//         res.redirect("/admin/meet_guides"); 
+//     });
 
 //contact page
 router.get("/contact", async function(req, res) {
@@ -138,44 +139,7 @@ router.get("/contact_edit/:id", async function(req, res) {
     }
 });
 
-router.post("/home_update/:id", async function(req, res) {
-    try {
-        let Id = req.params.id;
-        let { home_page_slider, home_page_title, doctor_name, home_image, doctor_description, contact, card_no } = req.body;
 
-        // Base query
-        let updateQuery = `UPDATE home_web SET 
-                               home_page_slider = ?, 
-                               home_page_title = ?, 
-                               doctor_name = ?, 
-                               doctor_description = ?, 
-                               contact = ?, 
-                               card_no = ?`;
-        
-        let queryParams = [home_page_slider, home_page_title, doctor_name, doctor_description, contact, card_no];
-
-        // Handle file upload
-        if (req.files && req.files.home_page_slider) {
-            let home_page_slider = new Date().getTime() + "_" + req.files.home_page_slider.name;
-            await req.files.home_page_slider.mv("public/admin_assets/home/" + home_page_slider);
-            
-            updateQuery += ", home_page_slider = ?";
-            queryParams.push(home_page_slider);
-        }
-
-        // Add WHERE clause
-        updateQuery += " WHERE id = ?";
-        queryParams.push(Id);
-
-        // Execute query
-        await exe(updateQuery, queryParams);
-
-        res.redirect("/admin/home");
-    } catch (err) {
-        console.error("Error updating home data:", err);
-        res.status(500).send("Internal Server Error");
-    }
-});
 router.post("/contact_update/:id", async function (req, res) {
    
 
@@ -214,12 +178,89 @@ router.post("/contact_update/:id", async function (req, res) {
 });
 
 
-router.get("/client_details", async function(req, res) {
+router.get("/client_review", async function(req, res) {
    
-    var data = await exe(`SELECT * FROM client_review`);
+    var data = await exe(`SELECT * FROM client_reviews`);
     var obj = { "client_info": data };
     res.render("admin/client_review.ejs",obj);
 
+});
+
+router.post("/client_details",async function(req,res){
+
+    if(req.files){
+var client_image=new Date().getTime()+req.files.client_image.name;
+req.files.client_image.mv("public/admin_assets/services/"+client_image);
+    }
+var d=req.body;
+var sql=`INSERT INTO client_reviews(client_image,client_name,client_location,client_description)VALUES('${client_image}','${d.client_name}','${d.client_location}','${d.client_description}')`;
+var data=await exe(sql);
+res.redirect("/admin/client_review");  
+});
+
+
+router.get("/service_card", async function(req, res) {
+   
+    var data = await exe(`SELECT * FROM service_card`);
+    var obj = { "service_card_info": data };
+    res.render("admin/service_card.ejs",obj);
+
+});
+
+router.post("/service_card_details",async function(req,res){
+
+var d=req.body;
+var sql=`INSERT INTO service_card(service_card_title, service_card_description)
+VALUES('${d.service_card_title}','${d.service_card_description}')`;
+var data=await exe(sql);
+res.redirect("/admin/service_card");  
+});
+
+router.get("/service_card_delete/:id",async function(req,res){
+    var servicecardId =req.params.id;
+    var sql =`DELETE FROM service_card where service_card_id=${servicecardId}`;
+    await exe(sql);
+    res.redirect("/admin/service_card");
+})
+
+
+router.get("/service_edit/:id", async function(req, res) {
+    try {
+        let servicecardId = req.params.id;
+        let data = await exe(`SELECT * FROM service_card WHERE  service_card_id= ${servicecardId}`);
+        
+        if (data.length === 0) {
+            return res.status(404).send("service_card Not Found");
+        }
+
+        res.render("admin/service_edit.ejs", { service_card_info: data[0] });
+    } catch (err) {
+        console.error("Error fetching service data:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
+router.post("/service_update/:id", async function (req, res) {
+    try {
+        let serviceCardId = req.params.id;
+        let { service_card_title, service_card_description } = req.body;
+
+        let sql = `
+            UPDATE service_card 
+            SET service_card_title = ?, 
+                service_card_description = ?
+            WHERE service_card_id = ?
+        `;
+
+        let queryParams = [service_card_title, service_card_description, serviceCardId];
+
+        await exe(sql, queryParams);  // Secure parameterized query execution
+        res.redirect("/admin/service_card");
+    } catch (err) {
+        console.error("Error updating service card:", err);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 
@@ -231,5 +272,3 @@ router.get("/dashboard",function(req,res){
 
 
 module.exports = router;
-
-
