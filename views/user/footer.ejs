@@ -6,11 +6,11 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
+                    <a class="btn btn-link" href="/about">About Us</a>
+                    <a class="btn btn-link" href="/contact">Contact Us</a>
                     <a class="btn btn-link" href="">Privacy Policy</a>
                     <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>
+                    <a class="btn btn-link" href="/#faq-section">FAQs & Help</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>
@@ -28,22 +28,22 @@
                     <h4 class="text-white mb-3">Gallery</h4>
                     <div class="row g-2 pt-2">
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="/user_assests/img/package-1.jpg" alt="">
+                        <a href="/gallary">    <img class="img-fluid bg-light p-1" src="/user_assests/img/ambarnath-2.jpg" alt=""></a>
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="/user_assests/img/package-2.jpg" alt="">
+                            <a href="/gallary">    <img class="img-fluid bg-light p-1" src="/user_assests/img/ambarnath-2.jpg" alt=""></a>
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="/user_assests/img/package-3.jpg" alt="">
+                     <a href="/gallary">    <img class="img-fluid bg-light p-1" src="/user_assests/img/ambarnath-2.jpg" alt=""></a>
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="/user_assests/img/package-2.jpg" alt="">
+                            <a href="/gallary">    <img class="img-fluid bg-light p-1" src="/user_assests/img/ambarnath-2.jpg" alt=""></a>
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="/user_assests/img/package-3.jpg" alt="">
+                     <a href="/gallary">    <img class="img-fluid bg-light p-1" src="/user_assests/img/ambarnath-2.jpg" alt=""></a>
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="/user_assests/img/package-1.jpg" alt="">
+                            <a href="/gallary">    <img class="img-fluid bg-light p-1" src="/user_assests/img/ambarnath-2.jpg" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -57,29 +57,87 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
-
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
+          <div class="footer">
+                        <div class="footer_bg">
+                            <div class="footer_bg_one"></div>
+                            <div class="footer_bg_two"></div>
                         </div>
                     </div>
+              <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+
+                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                    Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                 </div>
             </div>
         </div>
     </div>
+  
     <!-- Footer End -->
-
+    <style> 
+  
+     .footer_bg {
+        position: relative;
+        bottom: 0;
+        background: url("/user_assests/img/footer_bg.png") no-repeat scroll center 0;
+        width: 100%;
+        height: 266px;
+        overflow: hidden;
+       
+    }
+ .footer_bg .footer_bg_one {
+        background: url("/user_assests/img/gif/bus5.gif") no-repeat center center;
+        width: 330px;
+        height: 105px;
+        background-size: 100%;
+        position: absolute;
+        bottom: 20px;
+        left: 30%;
+        -webkit-animation: myfirst 25s linear infinite;
+        animation: myfirst 25s linear infinite;
+       
+     
+    }
+ .footer_bg .footer_bg_two {
+        background: url("/user_assests/img/gif/sco.png") no-repeat center center;
+        width: 200px;
+        height: 100px;
+        background-size: 100%;
+        bottom: -5px;
+        left: 38%;
+        position: absolute;
+        -webkit-animation: myfirst 15s linear infinite;
+        animation: myfirst 15s linear infinite;
+       
+    }
+    
+    @-moz-keyframes myfirst {
+        0% {
+            left: -25%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+    @-webkit-keyframes myfirst {
+        0% {
+            left: -25%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+    @keyframes myfirst {
+        0% {
+            left: -25%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+    </style>
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

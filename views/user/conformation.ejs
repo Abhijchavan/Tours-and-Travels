@@ -35,7 +35,7 @@
                     <a href="/user/select_destination"><div class="seat available">A4</div></a>
                     <a href="/user/select_destination"><div class="seat unavailable">A4</div></a>
                 
-                    <!-- Second row (2 seats) -->
+               
                     <a href="/user/select_destination"><div class="seat unavailable">B1</div></a>
                     <a href="/user/select_destination"><div class="seat available">B2</div></a>
                     <a href="/user/select_destination"><div class="seat male">A3</div></a>
@@ -45,7 +45,6 @@
                     <a href="/user/select_destination"><div class="seat male">A4</div></a>
                     <a href="/user/select_destination"><div class="seat available">A4</div></a>
                 
-                    <!-- Empty row (Aisle space) -->
                     <div class="aisle"></div>
                     <div class="aisle"></div>
                     <div class="aisle"></div>
@@ -55,7 +54,7 @@
                     <div class="aisle"></div>
                     <div class="aisle"></div>
                 
-                    <!-- Third row (2 seats) -->
+              
                     <a href="/user/select_destination"><div class="seat unavailable">C1</div></a>
                     <a href="/user/select_destination"><div class="seat unavailable">C2</div></a>
                     <a href="/user/select_destination"><div class="seat available">A3</div></a>
@@ -131,96 +130,72 @@
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
 
-        <h2 class="passenger-title " style="text-align: center;">Passenger Details</h2>
-        <span><i class="bi bi-person-circle" style=" padding: 5px;"></i> <strong>Passenger Information</strong></span>
+        <h2 class="passenger-title text-Warning">Passenger Details</h2>
         <div class="passenger-information">
-           <span style=" font-size: 13.5px;">Passenger 1 |
-            Seat 21
-            This seat is reserved for Male Passenger
-            </span>
-            <form action="" class="col-12">
-                <label for="name">Name</label><br>
-                <input type="text" placeholder="Name " class="col-12">
+            <h3 class="text-danger"><i class="bi bi-person-circle"></i> Passenger Information</h3>
+            <p>Passenger 1 | Seat 21 <br> <span class="highlight">Reserved for Male Passenger</span></p>
+            <form class="form-group">
+                <label for="name">Name</label>
+                <input type="text" placeholder="Enter Full Name">
+              
+              <div class="form-row d-flex ">
+                        <label class="col-6">Gender</label>
+                        <label class="col-6">Age</label>
+                    </div>
+                    <div class="form-row d-flex">
+                        <div class="gender-group d-flex col-6 gap-3" >
+                          <input type="radio" name="gender" id="male">
+                            <label for="male">Male</label>
+                            <input type="radio" name="gender" id="female">
+                            <label for="female">Female</label>
+                        </div>
+                        <input type="text" placeholder="Enter Age" class="age-input">
+                    </div>
             
-                <span>
-                    <label for="" class="col-6">Gender</label>
-                    <label for="">Age</label>
-                </span><br>
-               
-                <span>
-                    <input type="radio"  >male
-                    <input type="radio"  >female
-                    <input type="text" name="" id="" class="" style="margin-left: 70px;">
-                </span>
-                <label for="">State of Residence</label><br>
-                <input type="text" placeholder="State of Residence" class="col-12">
+                
+                <label for="state">State of Residence</label>
+                <input type="text" placeholder="State of Residence">
             </form>
         </div>
-      
-        <span style="margin-top: 20px;">  <i class="bi bi-telephone " style="padding: 5px;"></i><strong>Contact Details</strong></span>
-        <div class="Contact-information ">
-            <span style=" font-size: 15px; background-color: yellow; width: 100%;">
-                Your ticket will be sent to these details
-             </span>
-             <form action="" class="col-12">
-                 <label for="email">Email</label><br>
-                 <input type="email" placeholder="email " class="col-12">
-                
-          
-                 <label for="phone">Phone</label><br>
-                    <input type="number" placeholder="Phone NO " class="col-12">
-               
-                
-             </form>
-           
-         </div>
-        <div class="option mt-3">
-            <input type="radio" id="cancellation"  name="addcancellation"  >Add Free Cancellation
-           
-            <input type="radio" id="no-cancellation" name="cancellation"  >Don't add Free Cancellation
-           
+        
+        <div class="contact-information">
+            <h3 class="text-danger"><i class="bi bi-telephone"></i> Contact Details</h3>
+            <p class="note">Your ticket will be sent to these details</p>
+            <form class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Enter Email">
+                <label>Phone</label>
+                <input type="number" placeholder="Enter Phone Number">
+            </form>
         </div>
 
-        <a href="#" class="tnc-link">T&C Apply</a>
-
+        <div class="options">
+            <label><input type="radio" name="cancellation"> Add Free Cancellation</label>
+            <label><input type="radio" name="cancellation"> Don't Add Cancellation</label>
+        </div>
+        
         <div class="insurance-section">
-            <h3>redBus Assurance</h3>
-            <p>Secure your trip just at <span class="price">₹23</span> per passenger</p>
-
+            <h3 class="text-danger">redBus Assurance</h3>
+            <p>Secure your trip for <span class="price">₹23</span> per passenger</p>
             <div class="insurance-options">
                 <div class="insurance-card">
-                    <img src="/user_assests/img/kashmir-1.jpg" alt="Refund">
-                    <h4>Up to ₹500 Extra refund</h4>
+                    <img src="/user_assests/img/ambarnath-1.jpg" alt="Refund" >
+                    <h4 class="text-danger">Up to ₹500 Extra Refund</h4>
                     <p>In case your bus gets cancelled.</p>
                 </div>
                 <div class="insurance-card">
-                    <img src="/user_assests/img/kashmir-1.jpg" alt="Insurance">
-                    <h4>Insurance Coverage</h4>
-                    <p>Up to ₹75,000 on hospitalization & Up to ₹5 Lakh in case of death/PTD/PPD</p>
+                    <img src="/user_assests/img/ambarnath-1.jpg" alt="Insurance">
+                    <h4 class="text-danger">Insurance Coverage</h4>
+                    <p>Up to ₹75,000 hospitalization & ₹5 Lakh in case of death/PTD/PPD</p>
                 </div>
             </div>
-
-            <div >
-                <input type="radio" id="insurance-yes" name="insurance">
-                <label for="insurance-yes">Yes, Protect my trip at <span class="price">₹23</span> (1 passenger), I agree to the <a href="#" class="tnc-bold">Terms and Conditions</a></label>
-            </div>
-
-            <div >
-                <input type="radio" id="insurance-no" name="insurance" checked>
-                <label for="insurance-no">Don't add redBus Assurance</label>
-            </div>
+            <label><input type="radio" name="insurance"> Yes, Protect my trip</label>
+            <label><input type="radio" name="insurance" checked> No, I don't need insurance</label>
         </div>
+        
+        <p class="disclaimer">By proceeding, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>.</p>
 
-     
-
-        <p class="disclaimer">
-            By clicking on proceed, I agree that I have read and understood the <a href="#" class="tnc-link">TnCs</a> and the <a href="#" class="tnc-link">Privacy Policy</a>
-        </p>
-
-        <div class="total">
-            <p><strong>Total Amount :</strong> <span class="price">INR 475.00</span></p>
-            <p class="note">(*Exclusive of Taxes)</p>
-        </div>
+       
 
         <button class="pay-btn">PROCEED TO PAY</button>
     </div>
@@ -261,10 +236,10 @@ document.addEventListener("keydown", function(event) {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100%; /* Full-screen width */
     height: 100%;
     color: black;
-    background:rgb(225, 225, 225); 
+    background: rgba(225, 225, 225, 0.7); /* Semi-transparent background */
     backdrop-filter: blur(5px);
     display: none; /* Initially hidden */
     justify-content: center;
@@ -272,31 +247,12 @@ document.addEventListener("keydown", function(event) {
     z-index: 1050;
     transition: opacity 0.3s ease-in-out;
     overflow: hidden; /* Prevents scrolling on the page */
-}
-
-.passenger-information, .option, .Contact-information {
-    width: 100%;
-    max-width: 455px;  
-    border-radius: 12px;
-    margin-top: 10px;
-   
-    height: auto;
-    padding: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-.passenger-information label, .Contact-information label {
-    font-size: 14px;
-    padding: 5px;
-}
-.passenger-information input, .Contact-information input{
- border-radius: 10px; 
- border: 1px solid gray;
- font-size: 13px;
+    
 }
 .modal-content {
     position: relative;
     width: 90%;
-    max-width: 450px;
+    max-width: 800px;
     background: rgba(255, 255, 255, 0.2); /* Transparent Glass Effect */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -310,262 +266,52 @@ document.addEventListener("keydown", function(event) {
     max-height: 80vh; /* Limits height to 80% of viewport */
     overflow-y: auto; /* Enables scrolling INSIDE modal */
 }
-
-/* === HIDE PAGE SCROLL WHEN MODAL IS OPEN === */
-body.modal-open {
-    overflow: hidden;
-}
-
-/* === CLOSE BUTTON === */
 .close {
     position: absolute;
-  right: 20px;
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
-
-    padding: 5px 10px;
-  
-
-}
-
-/* === FADE-IN ANIMATION === */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* === MAKE SURE SCROLLBAR ONLY APPLIES TO MODAL === */
-.modal-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 3px;
-}
-
-.modal-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* === RESPONSIVE FIXES === */
-@media (max-width: 500px) {
-    .modal-content {
-        width: 95%;
-        padding: 15px;
-    }
-    
-    .close {
-        top: 10px;
-        right: 10px;
-    }
-}
-
-
-.option {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.option input {
-    margin-right: 10px;
-}
-
-.tnc-link {
-    color: #007bff;
-    font-size: 14px;
-    text-decoration: none;
-    display: block;
-    margin-top: 5px;
-}
-
-.insurance-section h3 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-.price {
-    color: red;
-    font-weight: bold;
-}
-
-.insurance-options {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
-.insurance-card {
-    width: 48%;
-    text-align: center;
-    padding: 10px;
-}
-
-.insurance-card img {
-    width: 40px;
-    margin-bottom: 8px;
-}
-
-.insurance-card h4 {
-    color: green;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.insurance-card p {
-    font-size: 12px;
-    color: gray;
-}
-
-
-.pay-btn {
-    width: 100%;
-    background: #d9534f;
-    color: white;
-    border: none;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-top: 15px;
+    right: 25px;
+    font-size: 20px;
     cursor: pointer;
 }
-
-.pay-btn:hover {
-    background: #c9302c;
-}
-
-/* Fade In Animation */
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-.passenger-container {
-    width: 500px;
-    background: #fff;
+.passenger-information, .contact-information, .insurance-section {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-top: 10px;
     border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
-.passenger-title {
-    font-size: 18px;
+.form-group label {
     font-weight: bold;
-    background: blue;
-    color: white;
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 4px;
-}
-
-.option {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.option input {
-    margin-right: 10px;
-}
-
-.tnc-link {
-    color: #007bff;
-    font-size: 14px;
-    text-decoration: none;
     display: block;
-    margin-top: 5px;
-}
-
-.insurance-section h3 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-.price {
-    color: red;
-    font-weight: bold;
-}
-
-.insurance-options {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
-.insurance-card {
-    width: 48%;
-    text-align: center;
-    padding: 10px;
-}
-
-.insurance-card img {
-    width: 40px;
-    margin-bottom: 8px;
-}
-
-.insurance-card h4 {
-    color: green;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.insurance-card p {
-    font-size: 12px;
-    color: gray;
-}
-
-.tnc-bold {
-    font-weight: bold;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.donation-section {
-    background: #fff3cd;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 15px;
-}
-
-.donation-title {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.know-more {
-    color: #007bff;
-    text-decoration: none;
-    font-size: 14px;
-    display: block;
-    margin-top: 5px;
-}
-
-.disclaimer {
-    font-size: 12px;
-    color: gray;
-    margin-top: 15px;
-}
-
-.total {
-    font-size: 16px;
-    font-weight: bold;
     margin-top: 10px;
 }
-
-.note {
-    font-size: 12px;
-    color: gray;
+input[type="text"], input[type="email"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 5px;
 }
-
+.options label, .insurance-section label {
+    display: block;
+    margin: 10px 0;
+}
+.insurance-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.insurance-card {
+    width: 48%;
+    text-align: center;
+    background: white;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.insurance-card img {
+    width: 40px;
+    margin-bottom: 5px;
+}
 .pay-btn {
     width: 100%;
     background: #d9534f;
@@ -573,22 +319,17 @@ body.modal-open {
     border: none;
     padding: 12px;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 6px;
     margin-top: 15px;
     cursor: pointer;
 }
-
 .pay-btn:hover {
     background: #c9302c;
 }
-     .confirmation-container {
-    width: 550px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
 }
-
 .header {
     display: flex;
     justify-content: space-between;

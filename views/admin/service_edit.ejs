@@ -1,12 +1,12 @@
 <%-include("navbar.ejs"); %>
 <div class="row">
     <div class="col-12">
-        <form action="/admin/service_update/<%=service_info.service_id%>" method="post" class="service_form" enctype="multipart/form-data">
+        <form action="/admin/service_update/<%=service_card_info.service_card_id%>" method="post" class="service_form" enctype="multipart/form-data">
             <h5>Service Title</h5>
-            <input type="text" name="service_title" class="form-control" placeholder="Service Title" value="<%=service_info.service_title%>">
+            <input type="text" name="service_card_title" class="form-control" placeholder="Service Title" value="<%=service_card_info.service_card_title%>">
             <br>
             <h5>Service Description</h5>
-            <input type="text" name="service_description" class="form-control" placeholder="Service Description" value="<%=service_info.service_description%>">
+            <input type="text" name="service_card_description" class="form-control" placeholder="Service Description" value="<%=service_card_info.service_card_description%>">
             <br>
             <button class="btn btn-primary btn-lg"> Submit</button>
             </form>

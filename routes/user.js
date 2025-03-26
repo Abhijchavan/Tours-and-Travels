@@ -47,9 +47,9 @@ router.get('/booking',async (req,res)=>{
 })
 
 
-router.get('/team',async (req,res)=>{
+router.get('/gallary',async (req,res)=>{
 
-    res.render("user/team.ejs")
+    res.render("user/gallary.ejs")
 })
 
 
@@ -59,10 +59,7 @@ router.get('/testimonial',async (req,res)=>{
 })
 
 
-router.get('/not_found',async (req,res)=>{
 
-    res.render("user/not_found.ejs")
-})
 
 
 router.get('/contact',async (req,res)=>{

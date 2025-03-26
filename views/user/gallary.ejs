@@ -1,0 +1,110 @@
+<%- include("navbar.ejs"); %>
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+  <div class="container py-5">
+      <div class="row justify-content-center py-5">
+          <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+              <h1 class="display-3 text-white animated slideInDown">Gallary</h1>
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb justify-content-center">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                      <li class="breadcrumb-item text-white active" aria-current="page">Services</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+
+    <style>
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .active-thumbnail {
+            border: 2px solid #007bff;
+        }
+        .gallery-img {
+            width: 300px;
+            height: 300px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+
+    <div class="container text-center mt-4">
+        <img src="/user_assests/img/ambarnath-1.jpg" alt="Image 1" class="gallery-img">
+        <img src="https://img.freepik.com/free-vector/cute-cow-playing-vr-game-with-controller-cartoon-vector-icon-illustration-animal-technology-flat_138676-13969.jpg" alt="Image 2" class="gallery-img">
+        <img src="https://img.freepik.com/free-vector/cute-police-soldier-cartoon-vector-icon-illustration-people-profession-icon-isolated-flat-vector_138676-11880.jpg" alt="Image 3" class="gallery-img">
+        <img src="https://img.freepik.com/free-vector/cute-cow-playing-vr-game-with-controller-cartoon-vector-icon-illustration-animal-technology-flat_138676-13969.jpg" alt="Image 4" class="gallery-img">
+        <img src="/user_assests/img/ambarnath-2.jpg" alt="Image 1" class="gallery-img">
+        <img src="https://img.freepik.com/free-vector/cute-cow-playing-vr-game-with-controller-cartoon-vector-icon-illustration-animal-technology-flat_138676-13969.jpg" alt="Image 2" class="gallery-img">
+        <img src="https://img.freepik.com/free-vector/cute-police-soldier-cartoon-vector-icon-illustration-people-profession-icon-isolated-flat-vector_138676-11880.jpg" alt="Image 3" class="gallery-img">
+        <img src="https://img.freepik.com/free-vector/cute-cow-playing-vr-game-with-controller-cartoon-vector-icon-illustration-animal-technology-flat_138676-13969.jpg" alt="Image 4" class="gallery-img">
+    
+    </div>
+    
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Image Gallery</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="imageCarousel" class="carousel slide" >
+                        <div class="carousel-inner"></div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const galleryImages = document.querySelectorAll(".gallery-img");
+            const carouselInner = document.querySelector(".carousel-inner");
+            const modal = new bootstrap.Modal(document.getElementById("imageModal"));
+            let imageList = [];
+
+            // Store all image sources
+            galleryImages.forEach(img => imageList.push(img.src));
+
+            function updateCarousel(activeIndex) {
+                carouselInner.innerHTML = "";
+                imageList.forEach((src, index) => {
+                    const div = document.createElement("div");
+                    div.classList.add("carousel-item");
+                    if (index === activeIndex) div.classList.add("active");
+                    div.innerHTML = `<img src="${src}" class="d-block w-100">`;
+                    carouselInner.appendChild(div);
+                });
+            }
+
+            function openModal(index) {
+                updateCarousel(index);
+                modal.show();
+            }
+
+            galleryImages.forEach((img, index) => {
+                img.addEventListener("click", () => openModal(index));
+            });
+        });
+    </script>
+
+
+<%- include("footer.ejs"); %>

@@ -3,9 +3,9 @@
     <div class="col-12">
     <p class="h3 mb-3"><strong>client_review</strong> Page Details</p>
 
-    <form action="client_details" method="post" class="services_form" enctype="multipart/form-data">
+    <form action="/admin/client_details" method="post" class="client_form" enctype="multipart/form-data">
     <h5>client image</h5>
-    <input type="file" name="_image" class="form-control">
+    <input type="file" name="client_image" class="form-control">
     <br>
 
     <h5>client name</h5>
@@ -42,7 +42,7 @@
             <td><%= i+1 %></td>
           
     
-            <td><img src="/admin_assets/services/<%=row.client_image %>" width="20%"></td>
+            <td><img src="/admin_assets/services/<%=row.client_image %>" height="60px" width="200px"></td>
            
             <td><%= row.client_name %></td>
             
