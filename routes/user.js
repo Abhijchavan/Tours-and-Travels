@@ -14,8 +14,9 @@ router.use(express.urlencoded({ extended: true }));
 
 
 router.get("/",async (req,res)=>{
+    var about = await exe(`SELECT * FROM about`);
+    res.render("user/home.ejs",{about:about});
 
-    res.render("user/home.ejs")
 })
 
 
@@ -42,6 +43,7 @@ router.get('/destination',async (req,res)=>{
 
 
 router.get('/booking',async (req,res)=>{
+    
 
     res.render("user/booking.ejs")
 })
@@ -88,6 +90,21 @@ router.get("/book_bus", async (req, res) => {
     const to = req.query.to || "";
     res.render("user/book_bus.ejs", { from, to });
 });
+
+router.post("/book_tour", async (req, res) => {
+    const { name, user_name,date_time, destination, special_request } = req.body;
+   
+        await exe(`INSERT INTO tour_travels(name, user_name,date_time, destination, special_request) VALUES ('${name}', '${user_name}', '${date_time}', '${destination}', '${special_request}')`);
+        // res.redirect("user/about");
+        res.redirect("/home");
+
+    
+});
+// router.get("/user/booking", async (req, res) => {
+//     const booking = await exe(`SELECT * FROM booking`);
+//     res.render("user/booking.ejs", { booking });
+// });
+
 
 
 
