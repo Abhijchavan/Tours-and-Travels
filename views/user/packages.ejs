@@ -27,69 +27,41 @@
             <h1 class="mb-5">Awesome Packages</h1>
         </div>
         <div class="row g-4 justify-content-center">
-            <div class="col-lg-4 col-md-6 wow fadeInUp" >
-                <div class="package-item">
-                    <div class="overflow-hidden">
-                        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                              <div class="carousel-item active" data-bs-interval="1500">
-                                <img src="/user_assests/img/destination-3.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item" data-bs-interval="1500"  >
-                                <img src="/user_assests/img/destination-2.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item" data-bs-interval="1500">
-                                <img src="/user_assests/img/destination-3.jpg" class="d-block w-100" alt="...">
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-                    <div class="d-flex border-bottom">
-                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Kedharnath</small>
-                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>2 days</small>
-                        <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
-                    </div>
-                    <div class="text-center p-4">
-                        <h3 class="mb-0"> ₹2000.00</h3>
-                        <div class="mb-3">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                        </div>
-                        <p>Kedarnath is a sacred Hindu temple dedicated to Lord Shiva, located in the Himalayas of Uttarakhand, India.</p>
-                        <div class="d-flex justify-content-center mb-2">
-                            <a href="#" class="btn btn-sm btn-primary px-3 border-end" data-bs-toggle="modal" data-bs-target="#tripModal" style="border-radius: 30px 0 0 30px;">Read More</a>
-                            <a href="#booking-section" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <% package_details.forEach((row, i) => { %>
+
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="package-item">
+                    
                     <div class="overflow-hidden">
                         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                              <div class="carousel-item active" data-bs-interval="1500">
-                                <img src="/user_assests/img/kashmir-1.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item" data-bs-interval="1500"  >
-                                <img src="/user_assests/img/kashmir-2.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item" data-bs-interval="1500">
-                                <img src="/user_assests/img/kashmir-3.jpg" class="d-block w-100" alt="...">
-                              </div>
+                                <div class="carousel-item active" data-bs-interval="1500">
+                                    <img src="/admin_assets/package_img/<%= row.slider_image1 %>" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="1500">
+                                    <img src="/admin_assets/package_img/<%= row.slider_image2 %>" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="1500">
+                                    <img src="/admin_assets/package_img/<%= row.slider_image3 %>" class="d-block w-100" alt="...">
+                                </div>
                             </div>
-                          </div>
+                        </div>          
                     </div>
+                        
                     <div class="d-flex border-bottom">
-                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Kashmir</small>
-                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>6 days</small>
-                        <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
+                        
+                        <small class="flex-fill text-center border-end py-2">
+                            <i class="fa fa-map-marker-alt text-primary me-2"></i><%= row.package_location %>
+                        </small>
+                        <small class="flex-fill text-center border-end py-2">
+                            <i class="fa fa-calendar-alt text-primary me-2"></i><%= row.package_days %> days
+                        </small>
+                        <small class="flex-fill text-center py-2">
+                            <i class="fa fa-user text-primary me-2"></i><%= row.package_person %> Person
+                        </small>
                     </div>
                     <div class="text-center p-4">
-                        <h3 class="mb-0"> ₹139.00</h3>
+                        <h3 class="mb-0"> ₹ <%= row.package_price %></h3>
                         <div class="mb-3">
                             <small class="fa fa-star text-primary"></small>
                             <small class="fa fa-star text-primary"></small>
@@ -97,58 +69,23 @@
                             <small class="fa fa-star text-primary"></small>
                             <small class="fa fa-star text-primary"></small>
                         </div>
-                        <p>Kashmir is a picturesque region known for its breathtaking landscapes, rich culture, and historical significance.</p>
+                        <p><%= row.package_desc %></p>
                         <div class="d-flex justify-content-center mb-2">
                             <a href="#" class="btn btn-sm btn-primary px-3 border-end" data-bs-toggle="modal" data-bs-target="#tripModal" style="border-radius: 30px 0 0 30px;">Read More</a>
                             <a href="#booking-section" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
                         </div>
-                    </div>
+                  
+                    </div>        
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="package-item">
-                    <div class="overflow-hidden">
-                        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                              <div class="carousel-item active" data-bs-interval="1500">
-                                <img src="/user_assests/img/ambarnath-1.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item" data-bs-interval="1500"  >
-                                <img src="/user_assests/img/ambarnath-2.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item" data-bs-interval="1500">
-                                <img src="/user_assests/img/ambarnath-3.jpg" class="d-block w-100" alt="...">
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-                    <div class="d-flex border-bottom">
-                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Ambernath</small>
-                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>2 days</small>
-                        <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
-                    </div>
-                    <div class="text-center p-4">
-                        <h3 class="mb-0"> ₹1890.00</h3>
-                        <div class="mb-3">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                        </div>
-                        <p>Ambernath is a city in Maharashtra, India, known for its ancient Shiva temple, industrial hubs, and vibrant local culture.
-                        </p>
-                        <div class="d-flex justify-content-center mb-2">
-                            <a href="#" class="btn btn-sm btn-primary px-3 border-end" data-bs-toggle="modal" data-bs-target="#tripModal" style="border-radius: 30px 0 0 30px;">Read More</a>
-                            <a href="#booking-section" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <% }) %>            
         </div>
     </div>
 </div>
+
 <!-- Bootstrap Modal -->
+<% package_details.forEach((row, i) => { %>
+
 <div class="modal fade" id="tripModal" tabindex="-1" aria-labelledby="tripModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -162,10 +99,10 @@
             <!-- Modal Body -->
             <div class="modal-body">
                 <!-- Trip Image -->
-                <img src="/user_assests/img/ambarnath-2.jpg" class="img-fluid rounded m-5" alt="Kedarnath Trip">
+                <img src="/admin_assets/package_img/<%= row.slider_image1 %>" class="img-fluid rounded m-5" alt="Kedarnath Trip">
 
                 <h4 class="text-primary"><i class="bi bi-calendar-check"></i> Trip Overview</h4>
-                <p >Experience a divine journey to Kedarnath, one of India's most sacred Hindu temples, nestled in the **Himalayas**. This **2-day pilgrimage** includes a guided visit to Kedarnath Temple, stunning views, and comfortable accommodations.</p>
+                <p ><%= row.package_desc %></p>
 
                 <!-- 🗺️ Itinerary Section -->
                 <h5 class="text-danger"><i class="bi bi-map"></i> Detailed Itinerary</h5>
@@ -219,6 +156,8 @@
             </div>
         </div>
     </div>
+    <% }) %>            
+
 </div>
 
 <!-- Bootstrap 5.3 JS (Required) -->
