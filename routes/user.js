@@ -50,9 +50,10 @@ router.get('/booking',async (req,res)=>{
 
 
 router.get('/gallary',async (req,res)=>{
-
-    res.render("user/gallary.ejs")
-})
+    var data = await exe(`SELECT * FROM gallary`);
+    var obj = { "gallary_info": data };
+    res.render("user/gallary.ejs",obj);
+});
 
 
 router.get('/testimonial',async (req,res)=>{

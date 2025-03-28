@@ -425,4 +425,35 @@ router.post("/update_package_details", async function (req, res) {
     res.redirect("/admin/package_details");
 });
 
+
+
+router.get("/gallary", async function(req, res) {
+   
+    var data = await exe(`SELECT * FROM gallary`);
+    var obj = { "gallary_info": data };
+    res.render("admin/gallary.ejs",obj);
+
+});
+
+router.post("/gallary_details",async function(req,res){
+
+    if(req.files){
+var gallary_image=new Date().getTime()+req.files.gallary_image.name;
+req.files.gallary_image.mv("public/admin_assets/gallary/"+gallary_image);
+    }
+var d=req.body;
+var sql=`INSERT INTO gallary (gallary_image)VALUES('${gallary_image}')`;
+var data=await exe(sql);
+res.redirect("/admin/gallary");  
+});
+
+router.get("/gallary_delete/:id", async function (req, res) {
+    var gallaryid = req.params.id;
+
+    var sql = `DELETE FROM gallary WHERE gallary_id = '${gallaryid}'`;
+    var data =await exe(sql);
+
+    res.redirect("/admin/gallary");
+});
+
 module.exports = router;

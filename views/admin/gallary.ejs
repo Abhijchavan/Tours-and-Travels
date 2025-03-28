@@ -1,0 +1,52 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+    <div class="col-12">
+    <p class="h3 mb-3"><strong>Gallery</strong> Page Details</p>
+
+    <form action="/admin/gallary_details" method="post" class="gallary_form" enctype="multipart/form-data">
+    <h5>gallary image</h5>
+    <input type="file" name="gallary_image" class="form-control">
+    <br>
+
+    
+    <button class="btn btn-primary btn-lg">Submit</button>
+    </form>
+
+
+<table class="table table-striped table-hover mt-3 ">
+    <tr>
+        <th>gallary Id</th>
+        <th>gallary image</th>
+        
+        <th>Action</th>
+    </tr>
+    <% gallary_info.map(function(row, i) { %>
+        <tr>
+            <td><%= i+1 %></td>
+          
+    
+            <td><img src="/admin_assets/gallary/<%=row.gallary_image %>" height="60px" width="200px"></td>
+<td>
+     <td>
+        <a href="/admin/gallary_delete/<%= row.gallary_id %>" class="btn btn-danger" 
+           onclick="return confirm('Are you sure you want to delete this record?');">
+           Delete
+        </a>
+    </td> 
+    
+</td>   
+</tr>
+<% }) %>
+</table>
+<hr>
+</div></div>
+
+<%-include("footer.ejs"); %>
+
+
+<!-- CREATE TABLE gallary  (
+    gallary_id INT AUTO_INCREMENT PRIMARY KEY,
+    gallary_image VARCHAR(255)
+
+); -->
+ 

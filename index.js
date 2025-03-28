@@ -57,7 +57,6 @@ app.use("/admin",admin_routes);
 app.use("/",user_routes);
  
  
-app.listen(3000             
-    ,function(){
+app.listen(3000,function(){
     console.log("Server is running at 3000");
 })
