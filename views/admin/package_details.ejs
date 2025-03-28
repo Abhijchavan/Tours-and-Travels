@@ -6,6 +6,18 @@
 				<div>
 					<h1 class=" text-center p-3">Package details</h1>
 					<div class="row">
+                        <div class="col-md-4 mb-3">
+							Enter Slider Image1
+							<input type="file" name="slider_image1" class="form-control">   
+						</div>
+						<div class="col-md-4 mb-3">
+							Enter Slider Image2
+							<input type="file" name="slider_image2" class="form-control">   
+						</div>
+						<div class="col-md-4 mb-3">
+							Enter Slider Image3
+							<input type="file" name="slider_image3" class="form-control">   
+						</div>
 						<div class="col-md-4 mb-3">
 							Location
 							<input type="text" name="package_location" class="form-control">    
@@ -39,7 +51,10 @@
 	package_days TEXT,
 	package_person TEXT,
 	package_price TEXT,
-	package_desc TEXT
+	package_desc TEXT,
+    slider_image1 TEXT,
+    slider_image2 TEXT,
+    slider_image3 TEXT
 ) -->
 
 
@@ -57,6 +72,9 @@
         <th>P_Person</th>
         <th>P_Price</th>
         <th>P_Desc</th>
+        <th>S_image1</th>
+        <th>S_image2</th>
+        <th>S_image3</th>
     </tr>
 
     <% package_details.map((row,i)=>{ %>
@@ -76,6 +94,15 @@
             <td><%- row.package_person %></td>
             <td><%- row.package_price %></td>
             <td><%- row.package_desc %></td>
+            <td>
+                <img src="/admin_assets/package_img/<%- row.slider_image1 %>" width="100px">
+            </td>
+			<td>
+				<img src="/admin_assets/package_img/<%- row.slider_image2 %>" width="100px">
+            </td>
+			<td>
+				<img src="/admin_assets/package_img/<%- row.slider_image3 %>" width="100px">
+            </td>
         </tr>
         <% }) %>
 </table>
