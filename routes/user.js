@@ -22,48 +22,18 @@ router.get("/",async (req,res)=>{
 
 router.get("/about",async function(req,res){
     var about = await exe(`SELECT * FROM about`);
-    res.render("user/about.ejs",{about:about});
+    var tour_guide = await exe(`SELECT * FROM tour_guide`);
+    res.render("user/about.ejs",{"about":about,"tour_guide":tour_guide});
 
 });
 
 router.get('/services',async (req,res)=>{
     res.render("user/services.ejs")
 })
-// router.get('/packages',async (req,res)=>{
-//     var data = await exe(`SELECT * FROM package_slider`);
-//     var data1 = await exe(`SELECT * FROM package_details`);
-//     var obj = {"package_slider":data, "package_details":data1};
-//     res.render("user/packages.ejs",obj);
-// })
-// router.get('/packages', async (req, res) => {
-//     var data = await exe(`SELECT * FROM package_slider`);
-//     var data1 = await exe(`SELECT * FROM package_details`);
 
-//     // Remove duplicate package_id from package_slider (for divs)
-//     let uniquePackages = [];
-//     let seenPackageIds = new Set();
-
-//     data.forEach(slider => {
-//         if (!seenPackageIds.has(slider.package_id)) {
-//             seenPackageIds.add(slider.package_id);
-//             uniquePackages.push(slider);
-//         }
-//     });
-
-//     var obj = { 
-//         "package_slider": uniquePackages, // For div (No duplicates)
-//         "package_details": data1, // For table (All records)
-//         "all_packages": data  // Keeping all package records for the table
-//     };
-
-//     res.render("user/packages.ejs", obj);
-// });
 
 router.get('/packages', async (req, res) => {
-
     var data1 = await exe(`SELECT * FROM package_details`);
-
-
     var obj = { "package_details": data1 };
     res.render("user/packages.ejs", obj);
 });
