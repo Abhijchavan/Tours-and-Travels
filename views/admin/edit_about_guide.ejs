@@ -1,0 +1,45 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+	<div class="col-12">
+		<h1>Tours And Travels</h1>
+			<form action="/admin/update_guide" method="post" enctype="multipart/form-data">
+				<div>
+					<h1 class=" text-center p-3">Tour Guide details</h1>
+					<div class="row">
+                        <div class="col-md-12 mb-3" >
+                            <input type="hidden" name="tour_guide_id" class="form-control" value="<%- tour_guide.tour_guide_id %>">
+                        </div>
+                        <div class="col-md-6 mb-3">
+							Tour Guide Image
+							<input type="file" name="guide_img" class="form-control" value="<%- tour_guide.tour_guide_id %>">   
+						</div>
+                        <div class="col-md-6 mb-3">
+							<img src="/admin_assets/about_guide_img/<%- tour_guide.guide_img %>" width="100px">
+						</div>
+						<div class="col-md-4 mb-3">
+							Guide Name
+							<input type="text" name="guide_name" class="form-control" value="<%- tour_guide.guide_name %>">    
+						</div>
+						<div class="col-md-4 mb-3">
+							Guide Experience
+							<input type="text" name="guide_experience" class="form-control" value="<%- tour_guide.guide_experience %>">   
+						</div>
+						<div class="col-md-12 mb-3">
+							Instagram Link
+							<input type="url" name="instagram_link" class="form-control" value="<%- tour_guide.instagram_link %>"> 
+						</div>
+                        <div class="col-md-12 mb-3">
+							Facebook Link
+							<input type="url" name="facebook_link" class="form-control" value="<%- tour_guide.facebook_link %>"> 
+						</div>
+                        <div class="col-md-12 mb-3">
+							Whatsapp Link
+							<input type="url" name="whatsapp_link" class="form-control" value="<%- tour_guide.whatsapp_link %>">  
+						</div>
+                        <div class="col-md-12 mb-3" class="text-center">
+							<button class="btn btn-lg btn-primary" type="submit">update Info</button>   
+						</div>
+		</form>
+    </div>
+</div>
+<%-include("footer.ejs"); %>

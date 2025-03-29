@@ -269,106 +269,6 @@ router.get("/dashboard",function(req,res){
 });
 
 
-router.get("/package_slider",async function(req,res){
-    var data = await exe(`SELECT * FROM package_slider`);
-    var obj = {"package_slider":data};
-    res.render("admin/package_slider.ejs",obj);
-});
-
-// router.post("/save_package_slider",async function(req,res){
-    // var slider_image1 = "";
-    // var slider_image2 = "";
-    // var slider_image3 = "";
-
-    // if(req.files){
-    //     if(req.files.slider_image1){
-    //         slider_image1 = new Date().getTime()+req.files.slider_image1.name;
-    //         req.files.slider_image1.mv("public/admin_assets/package_img/"+slider_image1);
-    //     }
-    //     if(req.files.slider_image2){
-    //         slider_image2 = new Date().getTime()+req.files.slider_image2.name;
-    //         req.files.slider_image2.mv("public/admin_assets/package_img/"+slider_image2);
-    //     }
-    //     if(req.files.slider_image3){
-    //         slider_image3 = new Date().getTime()+req.files.slider_image3.name;
-    //         req.files.slider_image3.mv("public/admin_assets/package_img/"+slider_image3);
-    //     }
-    // }
-
-    // var sql = `INSERT INTO package_slider (slider_image1,slider_image2,slider_image3) VALUES (?,?,?)`;
-
-    // var data = await exe (sql,[slider_image1,slider_image2,slider_image3]);
-
-    // res.redirect("/admin/package_slider");
-// });
-
-// router.get("/delete_package_slider/:id", async function (req, res) {
-//     var package_slider_id = req.params.id;
-
-//     var sql = `DELETE FROM package_slider WHERE package_slider_id = '${package_slider_id}'`;
-//     var data =await exe(sql);
-
-//     res.redirect("/admin/package_slider");
-// });
-
-// router.get("/edit_package_slider/:id", async function (req, res) {
-//     var id = req.params.id;
-
-//     var sql = "SELECT * FROM package_slider WHERE package_slider_id = ?";
-//     var result = await exe(sql, [id]);
-
-//     res.render("admin/edit_package_slider.ejs", { package_slider:result[0] });
-// });
-
-
-// router.post("/update_package_slider", async function (req, res) {
-//     const { package_slider_id } = req.body;
-
-//     let slider_image1 = null;
-//     let slider_image2 = null;
-//     let slider_image3 = null;
-
-//     // Check if a file was uploaded
-//     if (req.files && req.files.slider_image1) {
-//         slider_image1 = new Date().getTime() + "-" + req.files.slider_image1.name;
-//         await req.files.slider_image1.mv("public/admin_assets/package_img/" + slider_image1); 
-//     } else {
-//         // If no new file is uploaded, keep the old image
-//         const oldData = await exe("SELECT slider_image1 FROM package_slider WHERE package_slider_id = ?", [package_slider_id]);
-//         slider_image1 = oldData[0].slider_image1;
-//     }
-
-//      // Check if a file was uploaded
-//      if (req.files && req.files.slider_image2) {
-//         slider_image2 = new Date().getTime() + "-" + req.files.slider_image2.name;
-//         await req.files.slider_image2.mv("public/admin_assets/package_img/" + slider_image2); 
-//     } else {
-//         // If no new file is uploaded, keep the old image
-//         const oldData = await exe("SELECT slider_image2 FROM package_slider WHERE package_slider_id = ?", [package_slider_id]);
-//         slider_image2 = oldData[0].slider_image2;
-//     }
-
-//     // Check if a file was uploaded
-//     if (req.files && req.files.slider_image3) {
-//         slider_image3 = new Date().getTime() + "-" + req.files.slider_image3.name;
-//         await req.files.slider_image3.mv("public/admin_assets/package_img/" + slider_image3); 
-//     } else {
-//         // If no new file is uploaded, keep the old image
-//         const oldData = await exe("SELECT slider_image3 FROM package_slider WHERE package_slider_id = ?", [package_slider_id]);
-//         slider_image3 = oldData[0].slider_image3;
-//     }
-
-    // const sql = `UPDATE package_slider 
-    //              SET slider_image1 = ?, slider_image2 = ?, slider_image3 = ?  WHERE package_slider_id = ?`;
-    // const values = [ slider_image1, slider_image2, slider_image3, package_slider_id];
-
-    // await exe(sql, values);
-
-    // res.redirect("/admin/package_slider");
-// });
-
-
-
 router.get("/package_details",async function(req,res){
     var data = await exe(`SELECT * FROM package_details`);
     var obj = {"package_details":data};
@@ -474,6 +374,7 @@ router.post("/update_package_details", async function (req, res) {
 });
 
 
+<<<<<<< Updated upstream
 
 router.get("/gallary", async function(req, res) {
    
@@ -502,6 +403,80 @@ router.get("/gallary_delete/:id", async function (req, res) {
     var data =await exe(sql);
 
     res.redirect("/admin/gallary");
+=======
+router.get("/about_guide",async function(req,res){
+    var data = await exe(`SELECT * FROM tour_guide`);
+    var obj = {"tour_guide":data};
+    res.render("admin/about_guide.ejs",obj);
+});
+
+router.post("/save_guide",async function(req,res){
+    var guide_img = "";
+
+    if(req.files){
+        if(req.files.guide_img){
+            guide_img = new Date().getTime()+req.files.guide_img.name;
+            req.files.guide_img.mv("public/admin_assets/about_guide_img/"+guide_img);
+        }
+    }
+
+    var sql = `INSERT INTO tour_guide(guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link, guide_img)
+     VALUES (?,?,?,?,?,?)`;
+
+    var d = req.body;
+    var data = await exe (sql,[d.guide_name,d.guide_experience,d.instagram_link,d.facebook_link,d.whatsapp_link,guide_img]);
+
+    res.redirect("/admin/about_guide");
+
+});
+
+router.get("/delete_about_guide/:id", async function (req, res) {
+    var tour_guide_id = req.params.id;
+
+
+    var sql = `DELETE FROM tour_guide WHERE tour_guide_id = '${tour_guide_id}'`;
+
+    var data =await exe(sql);
+
+    res.redirect("/admin/about_guide");
+});
+
+router.get("/edit_about_guide/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = "SELECT * FROM tour_guide WHERE tour_guide_id = ?";
+    var result = await exe(sql, [id]);
+
+    res.render("admin/edit_about_guide.ejs", { tour_guide:result[0] });
+});
+
+router.post("/update_guide", async function (req, res) {
+    const { tour_guide_id, guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link } = req.body;
+
+    let guide_img = null;
+
+    // Check if a file was uploaded
+    if (req.files && req.files.guide_img) {
+        guide_img = new Date().getTime() + "-" + req.files.guide_img.name;
+        await req.files.guide_img.mv("public/admin_assets/about_guide_img/" + guide_img); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT guide_img FROM tour_guide WHERE tour_guide_id = ?", [tour_guide_id]);
+        guide_img = oldData[0].guide_img;
+    }
+
+    
+
+    // SQL Update Query
+    const sql = `UPDATE tour_guide 
+                 SET guide_name = ?, guide_experience = ?, instagram_link = ?, facebook_link = ?, whatsapp_link = ? , guide_img = ?
+                 WHERE tour_guide_id = ?`;
+    const values = [guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link,guide_img, tour_guide_id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/about_guide");
+>>>>>>> Stashed changes
 });
 
 module.exports = router;

@@ -1,0 +1,97 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+	<div class="col-12">
+		<h1>Tours And Travels</h1>
+			<form action="/admin/save_guide" method="post" enctype="multipart/form-data">
+				<div>
+					<h1 class=" text-center p-3">Tour Guide details</h1>
+					<div class="row">
+                        <div class="col-md-4 mb-3">
+							Tour Guide Image
+							<input type="file" name="guide_img" class="form-control">   
+						</div>
+						<div class="col-md-4 mb-3">
+							Guide Name
+							<input type="text" name="guide_name" class="form-control">    
+						</div>
+						<div class="col-md-4 mb-3">
+							Guide Experience
+							<input type="text" name="guide_experience" class="form-control">   
+						</div>
+						<div class="col-md-12 mb-3">
+							Instagram Link
+							<input type="url" name="instagram_link" class="form-control"> 
+						</div>
+                        <div class="col-md-12 mb-3">
+							Facebook Link
+							<input type="url" name="facebook_link" class="form-control"> 
+						</div>
+                        <div class="col-md-12 mb-3">
+							Whatsapp Link
+							<input type="url" name="whatsapp_link" class="form-control">  
+						</div>
+                        <div class="col-md-12 mb-3" class="text-center">
+							<button class="btn btn-lg btn-primary" type="submit">Save Info</button>   
+						</div>
+		</form>
+		
+
+
+<!-- CREATE TABLE tour_guide(
+	tour_guide_id INT PRIMARY KEY AUTO_INCREMENT,
+	guide_img TEXT,
+	guide_name VARCHAR(100),
+	guide_experience VARCHAR(100),
+	instagram_link TEXT,
+	facebook_link TEXT,
+    whatsapp_link TEXT
+) -->
+
+
+<br>
+<div class="container  p-4 ">
+    <h1 class=" text-center p-3">Tour Guide List</h1> 
+        <div class="row">
+            <div class="col-md-12">
+<table class="table table-bordered table-sm display nowrap ">
+    <tr>
+        <th>Action</th>
+        <th>Sr.No</th>
+        <th>Guide Img</th>
+        <th>Guide Name</th>
+        <th>Guide Experience</th>
+        <th>Insta Link</th>
+        <th>Facebook Link</th>
+        <th>Whatsapp Link</th>
+    </tr>
+
+    <% tour_guide.map((row,i)=>{ %>
+        <tr>
+            <td>
+                    <a href="/admin/edit_about_guide/<%-row.tour_guide_id %>" class="btn btn-primary">
+                        edit
+                    </a>
+                
+                    <a href="/admin/delete_about_guide/<%-row.tour_guide_id %>" class="btn btn-danger" onclick="return confirm('Are You Sure...')">
+                        delete
+                    </a>
+            </td>
+            <td><%- i+1 %></td>
+            <td>
+                <img src="/admin_assets/about_guide_img/<%- row.guide_img %>" width="100px">
+            </td>
+            <td><%- row.guide_name %></td>
+            <td><%- row.guide_experience %></td>
+            <td><%- row.instagram_link %></td>
+            <td><%- row.facebook_link %></td>
+            <td><%- row.whatsapp_link %></td>
+        </tr>
+        <% }) %>
+</table>
+</div>
+</div>
+</div>
+
+</div>			
+</div>			
+<%-include("footer.ejs"); %>		

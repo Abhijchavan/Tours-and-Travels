@@ -60,11 +60,11 @@ router.get('/services',async (req,res)=>{
 // });
 
 router.get('/packages', async (req, res) => {
-    var data = await exe(`SELECT * FROM package_slider`);
+
     var data1 = await exe(`SELECT * FROM package_details`);
 
 
-    var obj = { "package_slider": data, "package_details": data1 };
+    var obj = { "package_details": data1 };
     res.render("user/packages.ejs", obj);
 });
 
