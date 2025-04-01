@@ -77,10 +77,79 @@ router.get("/about_delete/:id",async function (req,res) {
     res.redirect("/admin/about");
 });
 
-router.get("/meet_guides",async function(row,i){
-res.render("/admin/meet_guides.ejs")
+router.get("/about_guide",async function(req,res){
+    var data = await exe(`SELECT * FROM tour_guide`);
+    var obj = {"tour_guide":data};
+    res.render("admin/about_guide.ejs",obj);
 });
 
+router.post("/save_guide",async function(req,res){
+    var guide_img = "";
+
+    if(req.files){
+        if(req.files.guide_img){
+            guide_img = new Date().getTime()+req.files.guide_img.name;
+            req.files.guide_img.mv("public/admin_assets/about_guide_img/"+guide_img);
+        }
+    }
+
+    var sql = `INSERT INTO tour_guide(guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link, guide_img)
+     VALUES (?,?,?,?,?,?)`;
+
+    var d = req.body;
+    var data = await exe (sql,[d.guide_name,d.guide_experience,d.instagram_link,d.facebook_link,d.whatsapp_link,guide_img]);
+
+    res.redirect("/admin/about_guide");
+
+});
+
+router.get("/delete_about_guide/:id", async function (req, res) {
+    var tour_guide_id = req.params.id;
+
+
+    var sql = `DELETE FROM tour_guide WHERE tour_guide_id = '${tour_guide_id}'`;
+
+    var data =await exe(sql);
+
+    res.redirect("/admin/about_guide");
+});
+
+router.get("/edit_about_guide/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = "SELECT * FROM tour_guide WHERE tour_guide_id = ?";
+    var result = await exe(sql, [id]);
+
+    res.render("admin/edit_about_guide.ejs", { tour_guide:result[0] });
+});
+
+router.post("/update_guide", async function (req, res) {
+    const { tour_guide_id, guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link } = req.body;
+
+    let guide_img = null;
+
+    // Check if a file was uploaded
+    if (req.files && req.files.guide_img) {
+        guide_img = new Date().getTime() + "-" + req.files.guide_img.name;
+        await req.files.guide_img.mv("public/admin_assets/about_guide_img/" + guide_img); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT guide_img FROM tour_guide WHERE tour_guide_id = ?", [tour_guide_id]);
+        guide_img = oldData[0].guide_img;
+    }
+
+    
+
+    // SQL Update Query
+    const sql = `UPDATE tour_guide 
+                 SET guide_name = ?, guide_experience = ?, instagram_link = ?, facebook_link = ?, whatsapp_link = ? , guide_img = ?
+                 WHERE tour_guide_id = ?`;
+    const values = [guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link,guide_img, tour_guide_id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/about_guide");
+});
 // router.post("/guide_details", async function(req,res){
     
 
