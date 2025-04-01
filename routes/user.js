@@ -17,9 +17,10 @@ router.get("/",async (req,res)=>{
     var service = await exe(`SELECT * FROM service_card`);
     var client_reviews = await exe(`SELECT * FROM client_reviews`);
   var data = await exe(`SELECT * FROM package_details`)
-var faq = await exe(`SELECT * FROM faq`)
-  var client_review= await exe(`SELECT * FROM client_reviews`)
-    var obj = {"service_card_info":service,"client_info":client_reviews , "package_details":data, "faq_info":faq, "client_review":client_review};
+var faq = await exe(`SELECT * FROM faq`);
+  var client_review= await exe(`SELECT * FROM client_reviews`);
+  var tour_guide = await exe(`SELECT * FROM tour_guide`);
+    var obj = {"service_card_info":service,"client_info":client_reviews , "package_details":data, "faq_info":faq, "client_review":client_review,"tour_guide":tour_guide};
     res.render("user/home.ejs",obj);
 
 })
