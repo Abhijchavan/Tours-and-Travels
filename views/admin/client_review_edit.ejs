@@ -1,0 +1,40 @@
+
+     
+        <%-include("navbar.ejs"); %>
+        <div class="row">
+            <div class="col-12">
+            <p class="h3 mb-3"><strong>client_review</strong> Page Details</p>
+        
+            <form action="/admin/client_update" method="post"  enctype="multipart/form-data">
+                <input type="hidden" name="id" class="form-control" value="<%=client_info.id%>">
+                <br>
+            <h5>client image</h5>
+            <input type="file" name="client_image" class="form-control" value="<%=client_info.client_image%>">
+            <br>
+        
+            <h5>client name</h5>
+            <input type="text" name="client_name" class="form-control" value="<%=client_info.client_name%>">
+            <br> 
+        
+            <h5>client location</h5>
+            <input type="text" name="client_location" class="form-control" value="<%=client_info.client_location%>">
+            <br>
+        
+            <h5>client description</h5>
+            <textarea name="client_description" class="form-control" rows="4"><%=client_info.client_description%></textarea>
+             <br>
+        
+            <button class="btn btn-primary btn-lg"> Submit</button>
+            </form>
+        
+       
+        </div>
+    </div>
+        
+        <%-include("footer.ejs"); %>
+        
+        
+        
+        
+     
+      

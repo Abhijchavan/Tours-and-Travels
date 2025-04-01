@@ -15,7 +15,7 @@
   <button class="modify-btn" style="border-radius: 5px; border: 1px solid blakc; margin-top: 0; width: 120px;">Modify</button>
  </div>
 
- <div class="row bg-dark">
+ <div class="row bg-light">
     <div class="col-3 container-fluid" >
        <div class="container">
            <h5 style="background-color: #dde1ff; width: 560px; padding: 10px; font-size: 19px;">Click on an Available seat to proceed with your transaction.</h5>
@@ -65,7 +65,7 @@
                        <a href="/user/select_destination"><div class="seat available">A4</div></a>
                    </div>
                    
-                 
+                  
                </div>
            </div>
        </div>
@@ -107,10 +107,13 @@
                    <span style="margin-left: 10px;">Female</span>
                </div>
            </span> 
-   
-           <h6 class="m-1">
+           <p id="seatCount" style="margin-top: 10px; margin-left: 10px;">Seats Selected: 0</p>
+           <button id="proceedButton" disabled style="margin-top: 10px; padding: 10px 20px; background-color: #86b817; color: white; border: none; cursor: pointer; margin-left: 10px;">
+               Proceed
+           </button>
+           <!-- <h6 class="m-1">
                This booking is non-refundable</h6>
-               <p class="m-2">This booking falls under the 100% cancellation charges window of the cancellation policy</p>
+               <p class="m-2">This booking falls under the 100% cancellation charges window of the cancellation policy</p> -->
        </div>
    </div>
    
@@ -176,18 +179,47 @@
         .female { background: rgb(255, 217, 223); color:black; }
         .unavailable { background:white;background-color: rgb(255, 79, 79); color:black; cursor: not-allowed; }
         .available:hover,  .male:hover,  .female:hover { border:3px solid #45a049; }
+        .selected { background-color: green !important; color: white; }
        
 
 
     </style>
-<script>$(document).ready(() => {
-    $(".seat.available, .seat.female, .seat.male").click(function() {
-        $(this).toggleClass("selected").css("background-color", $(this).hasClass("selected") ? "green" : "");
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let selectedSeats = [];
+
+        document.querySelectorAll(".seat.available, .seat.female, .seat.male").forEach(seat => {
+            seat.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default action in case of accidental <a> tag usage
+                let seatNumber = this.textContent.trim();
+
+                if (this.classList.contains("selected")) {
+                    this.classList.remove("selected");
+                    selectedSeats = selectedSeats.filter(s => s !== seatNumber);
+                } else {
+                    this.classList.add("selected");
+                    selectedSeats.push(seatNumber);
+                }
+
+                document.getElementById("seatCount").textContent = "Seats Selected: " + selectedSeats.length;
+
+                let proceedButton = document.getElementById("proceedButton");
+                proceedButton.disabled = selectedSeats.length === 0;
+                proceedButton.style.backgroundColor = selectedSeats.length > 0 ? "blue" : "gray";
+            });
+        });
+
+        document.getElementById("proceedButton").addEventListener("click", function () {
+            if (selectedSeats.length > 0) {
+                alert("Seats Selected: " + selectedSeats.join(", "));
+                window.location.href = "/user/select_destination?seats=" + selectedSeats.join(",");
+            }
+        });
     });
-});
-
-
 </script>
+
+
 </body>
 </html>
 
