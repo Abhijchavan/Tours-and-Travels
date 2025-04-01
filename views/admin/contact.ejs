@@ -1,97 +1,52 @@
+
+
+<!-- CREATE TABLE contact_form (
+    contact_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255),
+    message TEXT NOT NULL
+); -->
+
+
+
 <%-include("navbar.ejs"); %>
 <div class="row">
     <div class="col-12">
-    <p class="h3 mb-3"><strong>contact</strong> Page Details</p>
-
-    <form action="contact_details" method="post" class="about_form display nowrap" enctype="multipart/form-data">
-    <h5>contact page image</h5>
-    <input type="file" name="contact_image" class="form-control" required>
-    <br>
-
-    
-    <h5>Contact Description</h5>
-    <textarea name="contact_description" class="form-control" placeholder="Enter contact description" rows="4"></textarea>
-    <br>
-     
-   
-    <h5>Office Address</h5>
-    <textarea name="office_address" class="form-control" placeholder="Office Address" rows="4"></textarea>
-    <br>
-
-   
-    <h5>Mobile Number</h5>
-    <input type="number" name="mobile_number" class="form-control" placeholder="Mobile Number" rows="4">
-    <br>
-
-    
-    <h5>Email Address</h5>
-    <input type="email" name="email_address" class="form-control" placeholder="Email Address" rows="4">
-    <br>
 
 
-     <button class="btn btn-primary btn-lg"> Submit</button>
-    </form>
-
-
-<table class="table table-striped table-hover mt-3 ">
-    <tr>
-        <th> Contact Id</th>
-        <th>Contact page image</th>
-      
-        <th>Contact Description</th>
-    
-        <th>office_description </th>
-       
-        <th>Mobile Number</th>
-        
-        <th>email Address</th>
-        <th>Action</th>
-    </tr>
-    <% contact_info.map(function(row, i) { %>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Contact Id</th>
+            <th>Contact Name</th>
+            <th>Contact Email</th>
+            <th>Subject </th>
+            <th>Message</th> 
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% contact.map(function(row,i){ %>
         <tr>
             <td><%= i+1 %></td>
-          
-    
-            <td><img src="/admin_assets/contact/<%=row.contact_image %>" width="20%"></td>
-           
-            <td><%= row.contact_description %></td>
-            
-            <td><%= row.office_address %></td>
-            
-            <td><%= row.mobile_number %></td>
-            
-            <td><%= row.email_address %></td>
-    
-    
-   
-
-
-     <td>
-        <a href="/admin/contact_edit/<%= row.id %>" class="btn btn-primary">Edit</a>
-        <a href="/admin/contact_delete/<%= row.id %>" class="btn btn-danger" 
-           onclick="return confirm('Are you sure you want to delete this record?');">
-           Delete
-        </a>
-    </td> 
-    
-</td>   
-</tr>
-<% }) %>
-</table>
-<hr>
-</div></div>
-
-<%-include("footer.ejs"); %>
-
-
-<!--CREATE TABLE contact (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    contact_image VARCHAR(255) ,
-
-    contact_description TEXT ,
-    office_address TEXT ,
-    mobile_number VARCHAR(10) ,
-    email_address TEXT 
+            <td><%= row.name%></td>
+            <td><%= row.email%></td>
+            <td><%= row.subject%></td>
+            <td><%= row.message %></td>  
+           <td> <a href="/admin/contact_delete/<%= row.contact_id %>" class="btn btn-danger" 
+                onclick="return confirm('Are you sure you want to delete this record?');">
+                Delete
+             </a>
+         </td>   
+        </tr>
+        <td>
   
-);-->
+           
+        <% }) %>
+    </tbody>
+</table>
+</div>
+</div>
+<%-include("footer.ejs"); %>
 

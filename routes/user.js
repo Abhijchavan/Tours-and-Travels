@@ -14,11 +14,15 @@ router.use(express.urlencoded({ extended: true }));
 
 
 router.get("/",async (req,res)=>{
-    var about = await exe(`SELECT * FROM about`);
-    res.render("user/home.ejs",{about:about});
+    var service = await exe(`SELECT * FROM service_card`);
+    var client_reviews = await exe(`SELECT * FROM client_reviews`);
+  var data = await exe(`SELECT * FROM package_details`)
+var faq = await exe(`SELECT * FROM faq`)
+  var client_review= await exe(`SELECT * FROM client_reviews`)
+    var obj = {"service_card_info":service,"client_info":client_reviews , "package_details":data, "faq_info":faq, "client_review":client_review};
+    res.render("user/home.ejs",obj);
 
 })
-
 
 router.get("/about",async function(req,res){
     var about = await exe(`SELECT * FROM about`);
@@ -27,37 +31,38 @@ router.get("/about",async function(req,res){
 
 });
 
-router.get('/services',async (req,res)=>{
-    res.render("user/services.ejs")
-})
+router.get('/services', async (req, res) => {
+    try {
+        var service = await exe(`SELECT * FROM service_card`);
+        var client_reviews = await exe(`SELECT * FROM client_reviews`);
 
+        res.render("user/services.ejs", {
+            service_card_info: service,
+            client_info: client_reviews
+        });
+    } catch (error) {
+        console.error("Error fetching services data:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 router.get('/packages', async (req, res) => {
-    var data1 = await exe(`SELECT * FROM package_details`);
-    var obj = { "package_details": data1 };
+
+    var data = await exe(`SELECT * FROM package_details`);
+    var obj = { "package_details": data };
     res.render("user/packages.ejs", obj);
 });
 
-
-
-router.get('/destination',async (req,res)=>{
-
-    res.render("user/destination.ejs")
-})
-
-
 router.get('/booking',async (req,res)=>{
-    
 
     res.render("user/booking.ejs")
 })
 
-
 router.get('/gallary',async (req,res)=>{
-    var data = await exe(`SELECT * FROM gallary`);
-    var obj = { "gallary_info": data };
-    res.render("user/gallary.ejs",obj);
-});
+var gallary = await exe(`SELECT * FROM gallary`);
+var obj = {"gallary_info":gallary};
+    res.render("user/gallary.ejs",obj)
+})
 
 
 router.get('/testimonial',async (req,res)=>{
@@ -70,9 +75,23 @@ router.get('/testimonial',async (req,res)=>{
 
 
 router.get('/contact',async (req,res)=>{
+    var data = await exe(`SELECT * FROM contact_form`);
+    var obj = {"contact":data};
+   
+    res.render("user/contact.ejs", obj)
+});
 
-    res.render("user/contact.ejs")
-})
+router.post('/save_contact',async (req,res)=>{
+   
+    var d=req.body;
+    
+    const sql = `INSERT INTO contact_form (name, email, subject, message) VALUES
+     ('${d.name}','${d.email}','${d.subject}','${d.message}')`;
+   
+    var data=await exe(sql);  
+    res.render("user/contact.ejs",)
+});
+
 router.get('/signup',async (req,res)=>{
 
     res.render("user/signup.ejs")
@@ -96,21 +115,12 @@ router.get("/book_bus", async (req, res) => {
     res.render("user/book_bus.ejs", { from, to });
 });
 
-router.post("/book_tour", async (req, res) => {
-    const { name, user_name,date_time, destination, special_request } = req.body;
-   
-        await exe(`INSERT INTO tour_travels(name, user_name,date_time, destination, special_request) VALUES ('${name}', '${user_name}', '${date_time}', '${destination}', '${special_request}')`);
-        // res.redirect("user/about");
-        res.redirect("/home");
-
-    
+router.get('/user/check_available_seat', async (req, res) => {
+    const from = req.query.from || "";
+    const to = req.query.to || "";
+    const date = req.query.date || "";
+  
+    res.render("user/check_available_seat.ejs",{from,to,date});
 });
-// router.get("/user/booking", async (req, res) => {
-//     const booking = await exe(`SELECT * FROM booking`);
-//     res.render("user/booking.ejs", { booking });
-// });
-
-
-
 
 module.exports = router;

@@ -39,13 +39,14 @@
             margin: 5px;
         }
     </style>
-    <% gallary_info.map(function(row, i) { %>
+    
         
     <div class="container text-center mt-4">
+        <% gallary_info.map(function(row, i) { %>
         <img src="/admin_assets/gallary/<%=row.gallary_image %>" alt="Image 1" class="gallery-img">
-
+        <% }) %>
     </div>
-    <% }) %>
+  
     <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
