@@ -110,6 +110,10 @@ router.get('/user/conformation', async (req, res) => {
     res.render("user/conformation.ejs");
 });
 
+router.get('/privacy_policy',async(req,res)=>{
+    res.render("user/privacy_policy.ejs");
+});
+
 
 router.get("/book_bus", async (req, res) => {
     const from = req.query.from || "";
