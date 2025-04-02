@@ -264,8 +264,29 @@ router.post("/service_update/:id", async function (req, res) {
 });
 
 
-router.get("/dashboard",function(req,res){
-    res.render("admin/dashboard.ejs");
+router.get("/dashboard", async function(req,res){
+
+    var accepted = `SELECT COUNT(*) as accepted_count FROM tour_travels WHERE booking_status = 'Accepted'`;
+    var rejected = `SELECT COUNT(*) as rejected_count FROM tour_travels WHERE booking_status = 'Rejected'`;
+    var pending = `SELECT COUNT(*) as pending_count FROM tour_travels WHERE booking_status = 'pending'`;
+    var total = `SELECT COUNT(*) as total_count FROM tour_travels`;
+
+    var data = await exe(accepted);
+    var accepted_count = data[0].accepted_count;
+    data = await exe(rejected);
+    var rejected_count = data[0].rejected_count;
+    data = await exe(pending);
+    var pending_count = data[0].pending_count;
+    data = await exe(total);
+    var total_count = data[0].total_count;
+
+    var obj = {
+        "accepted_count": accepted_count,
+        "rejected_count": rejected_count,
+        "pending_count": pending_count,
+        "total_count": total_count
+    }
+    res.render("admin/dashboard.ejs", obj);
 });
 
 
@@ -396,12 +417,48 @@ router.get("/delete_package_details/:id", async function (req, res) {
 });
 
 router.get("/booking_list",async function(req,res){
-    var data = await exe(`SELECT * FROM tour_travels`);
+    var data = await exe(`SELECT * FROM tour_travels WHERE booking_status = 'pending'`);
     var obj = {"booking":data};
     res.render("admin/booking_list.ejs",obj);
 });
+router.get("/accepted",async (req,res)=>{
+    var data = await exe(`SELECT * FROM tour_travels WHERE booking_status = 'Accepted'`);
+    var obj = {"booking":data};
+    res.render("admin/accepted.ejs",obj);
+})
+router.get("/rejected",async (req,res)=>{   
+    var data = await exe(`SELECT * FROM tour_travels WHERE booking_status = 'Rejected'`);
+    var obj = {"booking":data};
+    res.render("admin/rejected.ejs",obj);
+});
+
+router.get("/booking_accepted/:id",async function(req,res){
+    var id = req.params.id;
+    var sql = `UPDATE tour_travels SET booking_status = 'Accepted' WHERE id = ?`;
+    await exe(sql, [id]);
+    res.redirect("/admin/booking_list");
+});
+router.get("/booking_rejected/:id",async function(req,res){
+    var id = req.params.id;
+    var sql = `UPDATE tour_travels SET booking_status = 'Rejected' WHERE id = ?`;
+    await exe(sql, [id]);
+    res.redirect("/admin/booking_list");
+});
 
 
+router.get("/accepted_delete/:id",async function(req,res){
+    var acceptedId =req.params.id;
+    var sql =`DELETE FROM tour_travels where id=${acceptedId}`;
+    await exe(sql);
+    res.redirect("/admin/accepted");
+})
+
+router.get("/rejected_deleted/:id",async function(req,res){    
+    var rejectedId =req.params.id;
+    var sql =`DELETE FROM tour_travels where id=${rejectedId}`;
+    await exe(sql);
+    res.redirect("/admin/rejected");
+});
 router.get("/edit_package_details/:id", async function (req, res) {
     var id = req.params.id;
 

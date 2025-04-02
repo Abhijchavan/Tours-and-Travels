@@ -96,7 +96,7 @@ router.post("/book_tour", async (req, res) => {
    
         await exe(`INSERT INTO tour_travels(name, user_name,date_time, destination, special_request) VALUES ('${name}', '${user_name}', '${date_time}', '${destination}', '${special_request}')`);
         // res.redirect("user/about");
-        res.redirect("/home");
+        res.redirect("/");
 
     
 });
