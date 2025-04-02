@@ -50,10 +50,10 @@ router.post("/login" ,async function (req, res) {
         res.status(500).send("Internal Server Error");
     }
 });
-router.get("/about", async function(req, res) {
+router.get("/about",checkAdminAuth,  async function(req, res) {
    
         var data = await exe(`SELECT * FROM about`);
-        var obj = { "about_info": data };
+        var obj = { "about": data };
         res.render("admin/about.ejs",obj);
    
 });
@@ -69,6 +69,43 @@ var data=await exe(sql);
 res.redirect("/admin/about");  
 });
 
+router.get("/about_edit/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = "SELECT * FROM about WHERE about_id = ?";
+    var result = await exe(sql, [id]);
+
+    res.render("admin/about_edit.ejs", { about:result[0] });
+});
+
+router.post("/update_about", async function (req, res) {
+    const { about_id, about_description} = req.body;
+
+    let about_img = null;
+
+    // Check if a file was uploaded
+    if (req.files && req.files.about_img) {
+        about_img = new Date().getTime() + "-" + req.files.about_img.name;
+        await req.files.about_img.mv("public/admin_assets/about/" + about_img); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT about_img FROM about WHERE about_id = ?", [about_id]);
+        about_img = oldData[0].about_img;
+    }
+
+    
+
+    // SQL Update Query
+    const sql = `UPDATE about 
+                 SET about_description = ? , about_img = ?
+                 WHERE about_id = ?`;
+    const values = [about_description, about_img, about_id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/about");
+});
+
 router.get("/about_delete/:id",async function (req,res) {
    
     let aboutId = req.params.id;
@@ -77,10 +114,79 @@ router.get("/about_delete/:id",async function (req,res) {
     res.redirect("/admin/about");
 });
 
-router.get("/meet_guides",async function(row,i){
-res.render("/admin/meet_guides.ejs")
+router.get("/about_guide",checkAdminAuth, async function(req,res){
+    var data = await exe(`SELECT * FROM tour_guide`);
+    var obj = {"tour_guide":data};
+    res.render("admin/about_guide.ejs",obj);
 });
 
+router.post("/save_guide", checkAdminAuth, async function(req,res){
+    var guide_img = "";
+
+    if(req.files){
+        if(req.files.guide_img){
+            guide_img = new Date().getTime()+req.files.guide_img.name;
+            req.files.guide_img.mv("public/admin_assets/about_guide_img/"+guide_img);
+        }
+    }
+
+    var sql = `INSERT INTO tour_guide(guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link, guide_img)
+     VALUES (?,?,?,?,?,?)`;
+
+    var d = req.body;
+    var data = await exe (sql,[d.guide_name,d.guide_experience,d.instagram_link,d.facebook_link,d.whatsapp_link,guide_img]);
+
+    res.redirect("/admin/about_guide");
+
+});
+
+router.get("/delete_about_guide/:id", async function (req, res) {
+    var tour_guide_id = req.params.id;
+
+
+    var sql = `DELETE FROM tour_guide WHERE tour_guide_id = '${tour_guide_id}'`;
+
+    var data =await exe(sql);
+
+    res.redirect("/admin/about_guide");
+});
+
+router.get("/edit_about_guide/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = "SELECT * FROM tour_guide WHERE tour_guide_id = ?";
+    var result = await exe(sql, [id]);
+
+    res.render("admin/edit_about_guide.ejs", { tour_guide:result[0] });
+});
+
+router.post("/update_guide", async function (req, res) {
+    const { tour_guide_id, guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link } = req.body;
+
+    let guide_img = null;
+
+    // Check if a file was uploaded
+    if (req.files && req.files.guide_img) {
+        guide_img = new Date().getTime() + "-" + req.files.guide_img.name;
+        await req.files.guide_img.mv("public/admin_assets/about_guide_img/" + guide_img); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT guide_img FROM tour_guide WHERE tour_guide_id = ?", [tour_guide_id]);
+        guide_img = oldData[0].guide_img;
+    }
+
+    
+
+    // SQL Update Query
+    const sql = `UPDATE tour_guide 
+                 SET guide_name = ?, guide_experience = ?, instagram_link = ?, facebook_link = ?, whatsapp_link = ? , guide_img = ?
+                 WHERE tour_guide_id = ?`;
+    const values = [guide_name, guide_experience, instagram_link, facebook_link, whatsapp_link,guide_img, tour_guide_id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/about_guide");
+});
 // router.post("/guide_details", async function(req,res){
     
 
@@ -95,87 +201,23 @@ res.render("/admin/meet_guides.ejs")
 //     });
 
 //contact page
-router.get("/contact", async function(req, res) {
+router.get("/contact", checkAdminAuth, async function(req, res) {
    
-    var data = await exe(`SELECT * FROM contact`);
-    var obj = { "contact_info": data };
+    var data = await exe(`SELECT * FROM contact_form`);
+    var obj = { "contact": data };
     res.render("admin/contact.ejs",obj);
 
 });
 
-router.post("/contact_details",async function(req,res){
 
-    if(req.files){
-var contact_image=new Date().getTime()+req.files.contact_image.name;
-req.files.contact_image.mv("public/admin_assets/contact/"+contact_image);
-    }
-var d=req.body;
-var sql=`INSERT INTO contact(contact_image,contact_description,office_address,mobile_number,email_address)VALUES('${contact_image}','${d.contact_description}','${d.office_address}','${d.mobile_number}','${d.email_address}')`;
-var data=await exe(sql);
-res.redirect("/admin/contact");  
-});
+    
 
 router.get("/contact_delete/:id",async function(req,res){
     var contactId =req.params.id;
-    var sql =`DELETE FROM contact where id=${contactId}`;
+    var sql =`DELETE FROM contact_form where contact_id=${contactId}`;
     await exe(sql);
     res.redirect("/admin/contact");
 })
-
-
-router.get("/contact_edit/:id", async function(req, res) {
-    try {
-        let contactId = req.params.id;
-        let data = await exe(`SELECT * FROM contact WHERE  id= ${contactId})`);
-        
-        if (data.length === 0) {
-            return res.status(404).send("Contact Not Found");
-        }
-
-        res.render("admin/contact_edit.ejs", { contact_info: data[0] });
-    } catch (err) {
-        console.error("Error fetching contact data:", err);
-        res.status(500).send("Internal Server Error");
-    }
-});
-
-
-router.post("/contact_update/:id", async function (req, res) {
-   
-
-    try {
-        let contactId = req.params.id;
-        let { contact_image, contact_description, office_address, mobile_number, email_address } = req.body;
-        let updateQuery = `
-            UPDATE contact SET 
-                contact_image = ?, 
-                contact_description = ?, 
-                office_address = ?, 
-                mobile_number = ?, 
-                email_address = ? 
-        `;
-
-    
-    let queryParams = [contact_image, contact_description, office_address, mobile_number, email_address];
-
-        if (req.files && req.files.contact_image) {
-            let contact_image = new Date().getTime() + "_" + req.files.contact_image.name;
-            await req.files.contact_image.mv("public/admin_assets/contact/" + contact_image);
-            updateQuery += ", contact_image = ?";
-            queryParams.push(contact_image);
-        }
-
-     
-        updateQuery += " WHERE id = ?";
-        queryParams.push(contactId);
-
-        await exe(updateQuery, queryParams);
-        res.redirect("/admin/contact");
-    } catch (err) {
-        console.error("Error updating contact:", err);
-        res.status(500).send("Internal Server Error");
-    }
-});
 
 
 router.get("/client_review", async function(req, res) {
@@ -186,17 +228,64 @@ router.get("/client_review", async function(req, res) {
 
 });
 
-router.post("/client_details",async function(req,res){
+router.post("/client_details",checkAdminAuth, async function(req,res){
 
-    if(req.files){
+if(req.files){
 var client_image=new Date().getTime()+req.files.client_image.name;
-req.files.client_image.mv("public/admin_assets/services/"+client_image);
+req.files.client_image.mv("public/admin_assets/client_review/"+client_image);
     }
 var d=req.body;
 var sql=`INSERT INTO client_reviews(client_image,client_name,client_location,client_description)VALUES('${client_image}','${d.client_name}','${d.client_location}','${d.client_description}')`;
 var data=await exe(sql);
 res.redirect("/admin/client_review");  
 });
+
+router.get("/client_review_delete/:id",async function(req,res){
+    var client_reviewId =req.params.id;
+    var sql =`DELETE FROM client_reviews where id=${client_reviewId}`;
+    await exe(sql);
+    res.redirect("/admin/client_review");
+});
+
+router.get("/client_review_edit/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = `SELECT * FROM client_reviews WHERE id = ?`;
+    var result = await exe(sql, [id]);
+
+    res.render("admin/client_review_edit.ejs", { client_info:result[0] });
+});
+
+router.post("/client_update", async function (req, res) {
+    const { id,client_name,client_location,client_description } = req.body;
+
+    let client_image = null;
+   
+
+    // Check if a file was uploaded
+    if (req.files && req.files.client_image) {
+        client_image = new Date().getTime() + "-" + req.files.client_image.name;
+        await req.files.client_image.mv("public/admin_assets/client_review/" + client_image); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT client_image FROM client_reviews WHERE id = ?", [id]);
+        client_image = oldData[0].client_image;
+    }
+
+      const sql = `UPDATE client_reviews 
+                 SET client_name = ?, client_location = ?, client_description = ?, client_image = ? 
+                 WHERE id = ?`;
+    const values = [client_name, client_location, client_description, client_image,id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/client_review");
+});
+
+
+
+
+
 
 
 router.get("/service_card", async function(req, res) {
@@ -227,7 +316,7 @@ router.get("/service_card_delete/:id",async function(req,res){
 router.get("/service_edit/:id", async function(req, res) {
     try {
         let servicecardId = req.params.id;
-        let data = await exe(`SELECT * FROM service_card WHERE  service_card_id= ${servicecardId})`);
+        let data = await exe(`SELECT * FROM service_card WHERE  service_card_id= ${servicecardId}`);
         
         if (data.length === 0) {
             return res.status(404).send("service_card Not Found");
@@ -264,7 +353,7 @@ router.post("/service_update/:id", async function (req, res) {
 });
 
 
-router.get("/dashboard", async function(req,res){
+router.get("/dashboard",checkAdminAuth, async function(req,res){
 
     var accepted = `SELECT COUNT(*) as accepted_count FROM tour_travels WHERE booking_status = 'Accepted'`;
     var rejected = `SELECT COUNT(*) as rejected_count FROM tour_travels WHERE booking_status = 'Rejected'`;
@@ -290,13 +379,15 @@ router.get("/dashboard", async function(req,res){
 });
 
 
-router.get("/package_slider",async function(req,res){
-    var data = await exe(`SELECT * FROM package_slider`);
-    var obj = {"package_slider":data};
-    res.render("admin/package_slider.ejs",obj);
+
+
+router.get("/package_details",async function(req,res){
+    var data = await exe(`SELECT * FROM package_details`);
+    var obj = {"package_details":data};
+    res.render("admin/package_details.ejs",obj);
 });
 
-router.post("/save_package_slider",async function(req,res){
+router.post("/save_package_details",async function(req,res){
     var slider_image1 = "";
     var slider_image2 = "";
     var slider_image3 = "";
@@ -316,34 +407,38 @@ router.post("/save_package_slider",async function(req,res){
         }
     }
 
-    var sql = `INSERT INTO package_slider (slider_image1,slider_image2,slider_image3) VALUES (?,?,?)`;
+    var sql = `INSERT INTO package_details(package_location,package_days,package_person,package_price,package_desc,slider_image1,slider_image2,slider_image3) VALUES (?,?,?,?,?,?,?,?)`;
 
-    var data = await exe (sql,[slider_image1,slider_image2,slider_image3]);
+    var d = req.body;
+    var data = await exe (sql,[d.package_location,d.package_days,d.package_person,d.package_price,d.package_desc,slider_image1,slider_image2,slider_image3]);
 
-    res.redirect("/admin/package_slider");
+    res.redirect("/admin/package_details");
+
 });
 
-router.get("/delete_package_slider/:id", async function (req, res) {
-    var package_slider_id = req.params.id;
+router.get("/delete_package_details/:id", async function (req, res) {
+    var package_details_id = req.params.id;
 
-    var sql =` DELETE FROM package_slider WHERE package_slider_id = '${package_slider_id}'`;
+
+    var sql = `DELETE FROM package_details WHERE package_details_id = '${package_details_id}'`;
+
     var data =await exe(sql);
 
-    res.redirect("/admin/package_slider");
+    res.redirect("/admin/package_details");
 });
 
-router.get("/edit_package_slider/:id", async function (req, res) {
+
+router.get("/edit_package_details/:id", async function (req, res) {
     var id = req.params.id;
 
-    var sql = "SELECT * FROM package_slider WHERE package_slider_id = ?";
+    var sql = `SELECT * FROM package_details WHERE package_details_id = ?`;
     var result = await exe(sql, [id]);
 
-    res.render("admin/edit_package_slider.ejs", { package_slider:result[0] });
+    res.render("admin/edit_package_details.ejs", { package_details:result[0] });
 });
 
-
-router.post("/update_package_slider", async function (req, res) {
-    const { package_slider_id } = req.body;
+router.post("/update_package_details", async function (req, res) {
+    const { package_details_id, package_location, package_days, package_person, package_price, package_desc } = req.body;
 
     let slider_image1 = null;
     let slider_image2 = null;
@@ -473,13 +568,77 @@ router.post("/update_package_details", async function (req, res) {
 
     // SQL Update Query
     const sql = `UPDATE package_details 
-                 SET package_location = ?, package_days = ?, package_person = ?, package_price = ?, package_desc = ?  
+                 SET package_location = ?, package_days = ?, package_person = ?, package_price = ?, package_desc = ? , slider_image1 = ?, slider_image2 = ?, slider_image3 = ? 
                  WHERE package_details_id = ?`;
-    const values = [package_location, package_days, package_person, package_price, package_desc, package_details_id];
+    const values = [package_location, package_days, package_person, package_price, package_desc,slider_image1, slider_image2, slider_image3, package_details_id];
 
     await exe(sql, values);
 
     res.redirect("/admin/package_details");
+});
+
+
+
+
+router.get("/faq", async function(req, res) {
+   
+    var data = await exe(`SELECT * FROM faq`);
+    var obj = { "faq_info": data };
+    res.render("admin/faq.ejs",obj);
+
+});
+
+router.post("/faq_details",async function(req,res){
+
+    var d=req.body;
+    var sql=`INSERT INTO faq(faq_question,faq_answer)VALUES('${d.faq_question}','${d.faq_answer}')`;
+    var data=await exe(sql);
+    res.redirect("/admin/faq");  
+    });
+    
+    router.get("/faq_delete/:id",async function(req,res){
+        var faqId =req.params.id;
+        var sql =`DELETE FROM faq where faq_id=${faqId}`;
+        await exe(sql);
+        res.redirect("/admin/faq");
+    })
+
+router.post("/contact_list", async function(req, res) {
+   
+    
+    res.render("admin/faq.ejs",obj);
+
+});
+
+
+
+router.get("/faq", async function(req, res) {
+   
+    var data = await exe(`SELECT * FROM faq`);
+    var obj = { "faq_info": data };
+    res.render("admin/faq.ejs",obj);
+
+});
+
+router.post("/gallary_details",async function(req,res){
+
+    if(req.files){
+var gallary_image=new Date().getTime()+req.files.gallary_image.name;
+req.files.gallary_image.mv("public/admin_assets/gallary/"+gallary_image);
+    }
+var d=req.body;
+var sql=`INSERT INTO gallary (gallary_image)VALUES('${gallary_image}')`;
+var data=await exe(sql);
+res.redirect("/admin/gallary");  
+});
+
+router.get("/gallary_delete/:id", async function (req, res) {
+    var gallaryid = req.params.id;
+
+    var sql = `DELETE FROM gallary WHERE gallary_id = '${gallaryid}'`;
+    var data =await exe(sql);
+
+    res.redirect("/admin/gallary");
 });
 
 module.exports = router;

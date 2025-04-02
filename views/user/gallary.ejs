@@ -4,13 +4,7 @@
       <div class="row justify-content-center py-5">
           <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
               <h1 class="display-3 text-white animated slideInDown">Gallary</h1>
-              <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb justify-content-center">
-                      <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                      <li class="breadcrumb-item text-white active" aria-current="page">Services</li>
-                  </ol>
-              </nav>
+              
           </div>
       </div>
   </div>
@@ -39,19 +33,14 @@
             margin: 5px;
         }
     </style>
-
+    
+        
     <div class="container text-center mt-4">
-        <img src="/user_assests/img/ambarnath-1.jpg" alt="Image 1" class="gallery-img">
-        <img src="https://img.freepik.com/free-vector/cute-cow-playing-vr-game-with-controller-cartoon-vector-icon-illustration-animal-technology-flat_138676-13969.jpg" alt="Image 2" class="gallery-img">
-        <img src="https://img.freepik.com/free-vector/cute-police-soldier-cartoon-vector-icon-illustration-people-profession-icon-isolated-flat-vector_138676-11880.jpg" alt="Image 3" class="gallery-img">
-        <img src="https://img.freepik.com/free-vector/cute-cow-playing-vr-game-with-controller-cartoon-vector-icon-illustration-animal-technology-flat_138676-13969.jpg" alt="Image 4" class="gallery-img">
-        <img src="/user_assests/img/ambarnath-2.jpg" alt="Image 1" class="gallery-img">
-        <img src="https://img.freepik.com/free-vector/cute-cow-playing-vr-game-with-controller-cartoon-vector-icon-illustration-animal-technology-flat_138676-13969.jpg" alt="Image 2" class="gallery-img">
-        <img src="https://img.freepik.com/free-vector/cute-police-soldier-cartoon-vector-icon-illustration-people-profession-icon-isolated-flat-vector_138676-11880.jpg" alt="Image 3" class="gallery-img">
-        <img src="https://img.freepik.com/free-vector/cute-cow-playing-vr-game-with-controller-cartoon-vector-icon-illustration-animal-technology-flat_138676-13969.jpg" alt="Image 4" class="gallery-img">
-    
+        <% gallary_info.map(function(row, i) { %>
+        <img src="/admin_assets/gallary/<%=row.gallary_image %>" alt="Image 1" class="gallery-img">
+        <% }) %>
     </div>
-    
+  
     <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

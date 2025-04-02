@@ -4,13 +4,7 @@
         <div class="row justify-content-center py-5">
             <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
                 <h1 class="display-3 text-white animated slideInDown">Services</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">Services</li>
-                    </ol>
-                </nav>
+              
             </div>
         </div>
     </div>
@@ -25,86 +19,24 @@
                 <h1 class="mb-5">Our Services</h1>
             </div>
             <div class="row g-4">
+                <% service_card_info.map(function(row,i){  %>
+
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item rounded pt-3">
                         <div class="p-4">
                             <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
                             <!-- <i class="fa fa-3x fa-globe text-primary "></i> -->
-                            <h5>WorldWide Tours</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                            <h5>
+                             <%-row.service_card_title%>
+                            </h5>
+                            <p><%-row.service_card_description  %> </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-hotel text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Hotel Reservation</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-user text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Travel Guides</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-cog text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Event Management</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-globe text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>WorldWide Tours</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-hotel text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Hotel Reservation</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-user text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Travel Guides</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-cog text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Event Management</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
+                <%  })  %>
+
+
+            
             </div>
         </div>
     </div>
@@ -118,14 +50,21 @@
                 <h6 class="section-title bg-white text-center text-primary px-3">Testimonial</h6>
                 <h1 class="mb-5">Our Clients Say!!!</h1>
             </div>
+
             <div class="owl-carousel testimonial-carousel position-relative">
+                <%client_info.map(function(row,i) {   %>
                 <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="/user_assests/img/testimonial-1.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
+                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="/admin_assets/client_review/<%=row.client_image %>" style="width: 80px; height: 80px;">
+                    <h5><%= row.client_name %></h5>
+                    <p><%= row.client_location %></p>
+                    <p><%= row.client_description %></p>
+                    <!-- <h5 class="mb-0">John Doe</h5>
                     <p>New York, USA</p>
                     <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+               -->
                 </div>
-                <div class="testimonial-item bg-white text-center border p-4">
+                <%  })  %>
+                <!-- <div class="testimonial-item bg-white text-center border p-4">
                     <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="/user_assests/img/testimonial-2.jpg" style="width: 80px; height: 80px;">
                     <h5 class="mb-0">John Doe</h5>
                     <p>New York, USA</p>
@@ -142,7 +81,7 @@
                     <h5 class="mb-0">John Doe</h5>
                     <p>New York, USA</p>
                     <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

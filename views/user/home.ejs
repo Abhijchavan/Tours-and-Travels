@@ -49,12 +49,11 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5">
-                <% about.map(function(row,i){  %>
-
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
-                    <div class="position-relative h-100">
-                        <img class="img-fluid position-absolute w-100 h-100" src="/admin_assets/about/<%-row.about_img %>" alt="" style="object-fit: cover;">
-                    </div>
+                  <% about.map(function(row,i){  %>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                        <div class="position-relative h-100">
+                            <img class="img-fluid position-absolute w-100 h-100" src="/admin_assets/about/<%-row.about_img %>" alt="" style="object-fit: cover;">
+                        </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
@@ -80,7 +79,7 @@
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>24/7 Service</p>
                         </div>
                     </div>
-                    <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
+                    <a class="btn btn-primary py-3 px-5 mt-2" href="/about">Read More</a>
                 </div>
                 <%  })  %>
             </div>
@@ -97,86 +96,24 @@
                 <h1 class="mb-5">Our Services</h1>
             </div>
             <div class="row g-4">
+
+            
+                  
+             <% service_card_info.map(function(row, i) { %>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item rounded pt-3">
                         <div class="p-4">
                             <!-- <i class="fa fa-3x fa-globe text-primary mb-4"></i> -->
                             <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>WorldWide Tours</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                            <!-- <h5>WorldWide Tours</h5>
+                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p> -->
+                            <h5><%= row.service_card_title %></h5>
+                            <p><%= row.service_card_description %></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-hotel text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Hotel Reservation</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-user text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Travel Guides</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-cog text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Event Management</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-globe text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>WorldWide Tours</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-hotel text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Hotel Reservation</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-user text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Travel Guides</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="service-item rounded pt-3">
-                        <div class="p-4">
-                            <!-- <i class="fa fa-3x fa-cog text-primary mb-4"></i> -->
-                            <img src="/user_assests/img/bus.gif" alt="" style="width: 100px; height: 100px; border-radius: 50%; padding: 5px;">
-                            <h5>Event Management</h5>
-                            <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                        </div>
-                    </div>
-                </div>
+                <% }) %> 
+            
             </div>
         </div>
     </div>
@@ -195,32 +132,32 @@
                     <div class="row g-3">
                         <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
                             <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="/user_assests/img/destination-1.jpg" alt="">
+                                <img class="img-fluid" src="/user_assests/img/mountain.jpg" alt="" style="width: 100%;">
                                 <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">30% OFF</div>
-                                <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Thailand</div>
+                                <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Ujjain</div>
                             </a>
                         </div>
                         <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
                             <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="/user_assests/img/destination-2.jpg" alt="">
+                                <img class="img-fluid" src="/user_assests/img/ambarnath-2.jpg" alt="">
                                 <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">25% OFF</div>
-                                <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Malaysia</div>
+                                <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Kedharnath</div>
                             </a>
                         </div>
                         <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
                             <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="/user_assests/img/destination-3.jpg" alt="">
+                                <img class="img-fluid" src="/user_assests/img/ambarnath-3.jpg" alt="">
                                 <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">35% OFF</div>
-                                <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Australia</div>
+                                <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Ambarnath</div>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
                     <a class="position-relative d-block h-100 overflow-hidden" href="">
-                        <img class="img-fluid position-absolute w-100 h-100" src="/user_assests/img/destination-4.jpg" alt="" style="object-fit: cover;">
+                        <img class="img-fluid position-absolute w-100 h-100" src="/user_assests/img/kashmir-1.jpg" alt="" style="object-fit: cover;">
                         <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">20% OFF</div>
-                        <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Indonesia</div>
+                        <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">Kashmir</div>
                     </a>
                 </div>
             </div>
@@ -236,125 +173,61 @@
                 <h6 class="section-title bg-white text-center text-primary px-3">Packages</h6>
                 <h1 class="mb-5">Awesome Packages</h1>
             </div>
+            
             <div class="row g-4 justify-content-center">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" >
-                    <div class="package-item">
-                        <div class="overflow-hidden">
-                            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                  <div class="carousel-item active" data-bs-interval="1500">
-                                    <img src="/user_assests/img/destination-3.jpg" class="d-block w-100" alt="...">
-                                  </div>
-                                  <div class="carousel-item" data-bs-interval="1500"  >
-                                    <img src="/user_assests/img/destination-2.jpg" class="d-block w-100" alt="...">
-                                  </div>
-                                  <div class="carousel-item" data-bs-interval="1500">
-                                    <img src="/user_assests/img/destination-3.jpg" class="d-block w-100" alt="...">
-                                  </div>
+                <% package_details.forEach((row, i) => { %>
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="package-item">
+                            
+                            <div class="overflow-hidden">
+                                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active" data-bs-interval="1500">
+                                            <img src="/admin_assets/package_img/<%= row.slider_image1 %>" class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item" data-bs-interval="1500">
+                                            <img src="/admin_assets/package_img/<%= row.slider_image2 %>" class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item" data-bs-interval="1500">
+                                            <img src="/admin_assets/package_img/<%= row.slider_image3 %>" class="d-block w-100" alt="...">
+                                        </div>
+                                    </div>
+                                </div>          
+                            </div>
+                                
+                            <div class="d-flex border-bottom">
+                                
+                                <small class="flex-fill text-center border-end py-2">
+                                    <i class="fa fa-map-marker-alt text-primary me-2"></i><%= row.package_location %>
+                                </small>
+                                <small class="flex-fill text-center border-end py-2">
+                                    <i class="fa fa-calendar-alt text-primary me-2"></i><%= row.package_days %> days
+                                </small>
+                                <small class="flex-fill text-center py-2">
+                                    <i class="fa fa-user text-primary me-2"></i><%= row.package_person %> Person
+                                </small>
+                            </div>
+                            <div class="text-center p-4">
+                                <h3 class="mb-0"> ₹ <%= row.package_price %></h3>
+                                <div class="mb-3">
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
                                 </div>
-                              </div>
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Kedharnath</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>2 days</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0"> ₹2000.00</h3>
-                            <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div>
-                            <p>Kedarnath is a sacred Hindu temple dedicated to Lord Shiva, located in the Himalayas of Uttarakhand, India.</p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                            </div>
+                                <p><%= row.package_desc %></p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a href="#" class="btn btn-sm btn-primary px-3 border-end" data-bs-toggle="modal" data-bs-target="#tripModal" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                    <a href="#booking-section" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                                </div>
+                          
+                            </div>        
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="package-item">
-                        <div class="overflow-hidden">
-                            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                  <div class="carousel-item active" data-bs-interval="1500">
-                                    <img src="/user_assests/img/kashmir-1.jpg" class="d-block w-100" alt="...">
-                                  </div>
-                                  <div class="carousel-item" data-bs-interval="1500"  >
-                                    <img src="/user_assests/img/kashmir-2.jpg" class="d-block w-100" alt="...">
-                                  </div>
-                                  <div class="carousel-item" data-bs-interval="1500">
-                                    <img src="/user_assests/img/kashmir-3.jpg" class="d-block w-100" alt="...">
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Kashmir</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>6 days</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0"> ₹139.00</h3>
-                            <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div>
-                            <p>Kashmir is a picturesque region known for its breathtaking landscapes, rich culture, and historical significance.</p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="package-item">
-                        <div class="overflow-hidden">
-                            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                  <div class="carousel-item active" data-bs-interval="1500">
-                                    <img src="/user_assests/img/ambarnath-1.jpg" class="d-block w-100" alt="...">
-                                  </div>
-                                  <div class="carousel-item" data-bs-interval="1500"  >
-                                    <img src="/user_assests/img/ambarnath-2.jpg" class="d-block w-100" alt="...">
-                                  </div>
-                                  <div class="carousel-item" data-bs-interval="1500">
-                                    <img src="/user_assests/img/ambarnath-3.jpg" class="d-block w-100" alt="...">
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Ambernath</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>2 days</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small>
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0"> ₹189.00</h3>
-                            <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div>
-                            <p>Ambernath is a city in Maharashtra, India, known for its ancient Shiva temple, industrial hubs, and vibrant local culture.
-                            </p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <% }) %>    
+               
             </div>
         </div>
     </div>
@@ -477,23 +350,26 @@
                 <h1 class="mb-5">Meet Our Guide</h1>
             </div>
             <div class="row g-4">
+                
+                <% tour_guide.map((row,i)=>{ %>
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="/user_assests/img/team-1.jpg" alt="">
+                            <div class="team-item">
+                                <div class="overflow-hidden">
+                                    <img class="img-fluid" src="/admin_assets/about_guide_img/<%- row.guide_img %>" alt="">
+                                </div>
+                                <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+                                    <a class="btn btn-square mx-1" href="<%- row.facebook_link %>"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square mx-1" href="<%- row.whatsapp_link %>"><i class="fab fa-whatsapp"></i></a>
+                                    <a class="btn btn-square mx-1" href="<%- row.instagram_link %>"><i class="fab fa-instagram"></i></a>
+                                </div>
+                                <div class="text-center p-4">
+                                    <h5 class="mb-0"><%- row.guide_name %></h5>
+                                    <small><%- row.guide_experience %></small>
+                                </div>
+                            </div>
                         </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Full Name</h5>
-                            <small>Designation</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <% }) %>
+                <!-- <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item">
                         <div class="overflow-hidden">
                             <img class="img-fluid" src="/user_assests/img/team-2.jpg" alt="">
@@ -540,7 +416,7 @@
                             <small>Designation</small>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -555,13 +431,20 @@
                 <h1 class="mb-5">Our Clients Say!!!</h1>
             </div>
             <div class="owl-carousel testimonial-carousel position-relative">
+                <% client_info.map(function(row, i) { %>
                 <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="/user_assests/img/testimonial-1.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
+                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="/admin_assets/client_review/<%=row.client_image %>" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0"><%= row.client_name %></h5>
+                    <p><%= row.client_location %></p>
+                    <p class="mb-0"><%= row.client_description %></p>
+               
+                    <!-- <h5 class="mb-0">John Doe</h5>
                     <p>New York, USA</p>
                     <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                -->
                 </div>
-                <div class="testimonial-item bg-white text-center border p-4">
+                <% }) %>
+                <!-- <div class="testimonial-item bg-white text-center border p-4">
                     <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="/user_assests/img/testimonial-2.jpg" style="width: 80px; height: 80px;">
                     <h5 class="mb-0">John Doe</h5>
                     <p>New York, USA</p>
@@ -578,19 +461,25 @@
                     <h5 class="mb-0">John Doe</h5>
                     <p>New York, USA</p>
                     <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
     <div class="faq-container" id="faq-section">
         <h2>Frequently Asked Questions</h2>
+        <% faq_info.map(function(row, i) { %>
         <div class="faq-item">
-            <div class="faq-question">What services does your heart hospital offer?</div>
-            <div class="faq-answer">We offer preventive care, diagnostic testing, interventional procedures, heart surgery, and rehabilitation programs.</div>
+            <div class="faq-question"><%= row.faq_question %></div>
+            <div class="faq-answer"><%= row.faq_answer %></div>
+      
+            <!-- <div class="faq-question">What services does your heart hospital offer?</div>
+            <div class="faq-answer">We offer preventive care, diagnostic testing, interventional procedures, heart surgery, and rehabilitation programs.</div> -->
         </div>
-        <div class="faq-item">
+        <% }) %>
+        <!-- <div class="faq-item">
             <div class="faq-question">Do I need a referral to see a cardiologist?</div>
             <div class="faq-answer">It depends on your insurance provider and medical condition. Some patients can schedule directly, while others may need a referral.</div>
+      
         </div>
         <div class="faq-item">
             <div class="faq-question">What should I do in case of a heart emergency?</div>
@@ -599,7 +488,7 @@
         <div class="faq-item">
             <div class="faq-question">How can I prevent heart disease?</div>
             <div class="faq-answer">Maintain a healthy diet, exercise regularly, manage stress, avoid smoking, and have regular heart check-ups.</div>
-        </div>
+        </div> -->
     </div>
     <script>
         // Toggle active class on FAQ items when question is clicked

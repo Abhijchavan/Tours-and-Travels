@@ -14,44 +14,64 @@ router.use(express.urlencoded({ extended: true }));
 
 
 router.get("/",async (req,res)=>{
-    var about = await exe(`SELECT * FROM about`);
-    res.render("user/home.ejs",{about:about});
+    var service = await exe(`SELECT * FROM service_card LIMIT 4`);
+    var client_reviews = await exe(`SELECT * FROM client_reviews LIMIT 4`);
+    var data = await exe(`SELECT * FROM package_details LIMIT 3`)
+    var faq = await exe(`SELECT * FROM faq LIMIT 4`);
+    var client_review= await exe(`SELECT * FROM client_reviews LIMIT 4`);
+    var tour_guide = await exe(`SELECT * FROM tour_guide LIMIT 4`);
+    var about = await exe(`SELECT * FROM about LIMIT 4`);
+    
+
+//     var client_reviews = await exe(`SELECT * FROM client_reviews`);
+//   var data = await exe(`SELECT * FROM package_details`)
+// var faq = await exe(`SELECT * FROM faq`);
+//   var client_review= await exe(`SELECT * FROM client_reviews`);
+//   var tour_guide = await exe(`SELECT * FROM tour_guide`);
+//   var about = await exe(`SELECT * FROM about`);
+    var obj = {"service_card_info":service,"client_info":client_reviews , "package_details":data, "faq_info":faq, "client_review":client_review,"tour_guide":tour_guide,"about":about};
+    res.render("user/home.ejs",obj);
 
 })
-
 
 router.get("/about",async function(req,res){
     var about = await exe(`SELECT * FROM about`);
-    res.render("user/about.ejs",{about:about});
+    var tour_guide = await exe(`SELECT * FROM tour_guide`);
+    res.render("user/about.ejs",{"about":about,"tour_guide":tour_guide});
 
 });
 
-router.get('/services',async (req,res)=>{
-    res.render("user/services.ejs")
-})
-router.get('/packages',async (req,res)=>{
+router.get('/services', async (req, res) => {
+    try {
+        var service = await exe(`SELECT * FROM service_card`);
+        var client_reviews = await exe(`SELECT * FROM client_reviews`);
 
-    res.render("user/packages.ejs")
-})
+        res.render("user/services.ejs", {
+            service_card_info: service,
+            client_info: client_reviews
+        });
+    } catch (error) {
+        console.error("Error fetching services data:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
+router.get('/packages', async (req, res) => {
 
-
-router.get('/destination',async (req,res)=>{
-
-    res.render("user/destination.ejs")
-})
-
+    var data = await exe(`SELECT * FROM package_details`);
+    var obj = { "package_details": data };
+    res.render("user/packages.ejs", obj);
+});
 
 router.get('/booking',async (req,res)=>{
-    
 
     res.render("user/booking.ejs")
 })
 
-
 router.get('/gallary',async (req,res)=>{
-
-    res.render("user/gallary.ejs")
+var gallary = await exe(`SELECT * FROM gallary`);
+var obj = {"gallary_info":gallary};
+    res.render("user/gallary.ejs",obj)
 })
 
 
@@ -65,9 +85,23 @@ router.get('/testimonial',async (req,res)=>{
 
 
 router.get('/contact',async (req,res)=>{
+    var data = await exe(`SELECT * FROM contact_form`);
+    var obj = {"contact":data};
+   
+    res.render("user/contact.ejs", obj)
+});
 
-    res.render("user/contact.ejs")
-})
+router.post('/save_contact',async (req,res)=>{
+   
+    var d=req.body;
+    
+    const sql = `INSERT INTO contact_form (name, email, subject, message) VALUES
+     ('${d.name}','${d.email}','${d.subject}','${d.message}')`;
+   
+    var data=await exe(sql);  
+    res.render("user/contact.ejs",)
+});
+
 router.get('/signup',async (req,res)=>{
 
     res.render("user/signup.ejs")
@@ -100,12 +134,5 @@ router.post("/book_tour", async (req, res) => {
 
     
 });
-// router.get("/user/booking", async (req, res) => {
-//     const booking = await exe(`SELECT * FROM booking`);
-//     res.render("user/booking.ejs", { booking });
-// });
-
-
-
 
 module.exports = router;

@@ -1,0 +1,86 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+    <div class="col-12">
+    <p class="h3 mb-3"><strong>Guide</strong> Page Details</p>
+
+    <form action="/admin/guide_details" method="post" class="guide_form" enctype="multipart/form-data">
+    <h5>guide image</h5>
+    <input type="file" name="guide_image" class="form-control">
+    <br>
+
+    <h5> facebook Icons</h5>
+    <input type="text" name="facebook_icons" class="form-control">
+    <br>
+
+    <h5> twitter Icons</h5>
+    <input type="text" name="twitter_icons" class="form-control" >
+    <br>
+
+    <h5> instagram Icons</h5>
+    <input type="text" name="instagram_icons" class="form-control" >
+    <br>
+
+    <h5>guide Name</h5>
+    <input type="text" name="guide_Name" class="form-control" required>
+    <br>
+
+    
+    <h5>description</h5>
+    <textarea name="description" class="form-control" placeholder="Enter description" rows="4"></textarea>
+    <br>
+
+    
+    <button class="btn btn-primary btn-lg">Submit</button>
+    </form>
+
+
+<table class="table table-striped table-hover mt-3 ">
+    <tr>
+        <th>guide Id</th>
+        <th>guide image</th>
+        <th>facebook Icons</th>
+        <th>twitter Icons</th>
+        <th>instagram Icons</th>
+        <th>giude Name</th>
+        <th>description</th>
+        
+        <th>Action</th>
+    </tr>
+    <% guide.map(function(row, i) { %>
+        <tr>
+            <td><%= i+1 %></td>
+                     <td><img src="/admin_assets/guide/<%=row.guide_image %>" height="60px" width="200px"></td>
+                     <td><%= row.facebook_icons %></td>
+                     <td><%= row.twitter_icons %></td>
+                     <td><%= row.twitter_icons %></td>
+                     <td><%= row.instagram_icons %></td>
+                     <td><%= row.guide_Name %></td>
+                     <td><%= row.description %></td>
+
+     <td>
+        <a href="/admin/gallary_delete/<%= row.gallary_id %>" class="btn btn-danger" 
+           onclick="return confirm('Are you sure you want to delete this record?');">
+           Delete
+        </a>
+    </td> 
+    
+</td>   
+</tr>
+<% }) %>
+</table>
+<hr>
+</div></div>
+
+<%-include("footer.ejs"); %>
+
+
+<!-- CREATE TABLE guide (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    guide_image VARCHAR(255) ,
+    facebook_icons VARCHAR(255),
+    twitter_icons VARCHAR(255),
+    instagram_icons VARCHAR(255),
+    guide_name VARCHAR(255) ,
+    description TEXT
+); -->
+

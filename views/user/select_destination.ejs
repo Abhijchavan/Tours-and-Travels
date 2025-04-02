@@ -2,12 +2,7 @@
 <div class="container-fluid bg-primary py-5 mb-5 hero-header">
     <div class="container py-5">
         <div class="row justify-content-center py-5">
-            
-
-
-
-
-            
+        
         </div>
     </div>
 
@@ -251,6 +246,191 @@
     
     </div>
 </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Seat Manager</title> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .controls {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .plus-btn {
+            background-color: #333;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        .dropdown, .seat-options {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            left: 0;
+        }
+        .seat-options {
+            margin-top: 5px;
+        }
+        .dropdown button, .seat-options button {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            width: 140px;
+        }
+        .add-seat-btn { background-color: #555; }
+        .add-row-btn { background-color: #222; }
+        .boys-btn { background-color: #007BFF; }
+        .girls-btn { background-color: #FF69B4; }
+        .general-btn { background-color: #28A745; }
+        
+        .bus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 400px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        .bus-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            min-height: 50px; /* Ensures rows stay visible even when empty */
+        }
+        .seat {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            color: white;
+        }
+        .boys { background-color: #007BFF !important; }
+        .girls { background-color: #FF69B4 !important; }
+        .general { background-color: #28A745 !important; }
+    </style>
+</head>
+<body>
+
+    <h2>Bus Seat Manager</h2>
+
+    <div class="container">
+        <div class="controls">
+            <button class="plus-btn" onclick="toggleDropdown()">➕</button>
+            <div class="dropdown" id="dropdownMenu">
+                <button class="add-seat-btn" onclick="toggleSeatOptions()">➕ Add Seat</button>
+                <button class="add-row-btn" onclick="addRow()">➕ Add Row</button>
+            </div>
+            <div class="seat-options" id="seatOptions">
+                <button class="boys-btn" onclick="addSeat('boys')">Boys Seat</button>
+                <button class="girls-btn" onclick="addSeat('girls')">Girls Seat</button>
+                <button class="general-btn" onclick="addSeat('general')">General Seat</button>
+            </div>
+        </div>
+
+        <div class="bus-container">
+            <div id="busLayout"></div>
+        </div>
+    </div>
+
+    <script>
+        const busContainer = document.getElementById("busLayout");
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        const seatOptions = document.getElementById("seatOptions");
+
+        let seatMatrix = []; // Start with an empty bus
+
+        function renderSeats() {
+            busContainer.innerHTML = "";
+            seatMatrix.forEach(row => {
+                const rowDiv = document.createElement("div");
+                rowDiv.classList.add("bus-row");
+                row.forEach(seat => {
+                    const seatDiv = document.createElement("div");
+                    seatDiv.classList.add("seat", seat.type);
+                    seatDiv.textContent = seat.id;
+                    rowDiv.appendChild(seatDiv);
+                });
+                busContainer.appendChild(rowDiv);
+            });
+        }
+
+        function addSeat(seatType) {
+            if (seatMatrix.length === 0) {
+                addRow(); // If there are no rows, create one
+            }
+
+            let lastRow = seatMatrix[seatMatrix.length - 1];
+
+            // Limit row size (e.g., 4 seats per row)
+            if (lastRow.length >= 4) {
+                addRow();
+                lastRow = seatMatrix[seatMatrix.length - 1];
+            }
+
+            let newSeatNumber = lastRow.length + 1;
+            let newSeatId = `${String.fromCharCode(65 + seatMatrix.length - 1)}${newSeatNumber}`;
+            lastRow.push({ id: newSeatId, type: seatType });
+            renderSeats();
+            seatOptions.style.display = "none";
+            dropdownMenu.style.display = "none";
+        }
+
+        function addRow() {
+            let newRowId = String.fromCharCode(65 + seatMatrix.length);
+            seatMatrix.push([]); // Add empty row
+            renderSeats();
+            dropdownMenu.style.display = "none";
+        }
+
+        function toggleDropdown() {
+            dropdownMenu.style.display = dropdownMenu.style.display === "flex" ? "none" : "flex";
+            seatOptions.style.display = "none";
+        }
+
+        function toggleSeatOptions() {
+            seatOptions.style.display = seatOptions.style.display === "flex" ? "none" : "flex";
+        }
+
+        renderSeats();
+    </script>
+
+</body>
+</html>
 
 
     <style>
