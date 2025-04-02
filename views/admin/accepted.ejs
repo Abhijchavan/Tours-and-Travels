@@ -22,10 +22,10 @@
                 <td><%= row.date_time %></td>
                 <td><%= row.destination %></td>
                 <td><%= row.special_request %></td>
-                <td class="text-warning fw-bold"><%= row.booking_status %></td>
+                <td class="text-success fw-bold"><%= row.booking_status %></td>
                 <td>
-                    <a href="/admin/booking_accepted/<%= row.id %>" class="btn btn-success">Accept</a>
-                    <a href="/admin/booking_rejected/<%= row.id %>" class="btn btn-danger">Rejected</a>
+                   
+                    <a href="/admin/accepted_delete/<%= row.id %>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         <% }); %>

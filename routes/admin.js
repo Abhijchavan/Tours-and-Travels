@@ -50,7 +50,7 @@ router.post("/login" ,async function (req, res) {
         res.status(500).send("Internal Server Error");
     }
 });
-router.get("/about", async function(req, res) {
+router.get("/about",checkAdminAuth,  async function(req, res) {
    
         var data = await exe(`SELECT * FROM about`);
         var obj = { "about": data };
@@ -114,13 +114,13 @@ router.get("/about_delete/:id",async function (req,res) {
     res.redirect("/admin/about");
 });
 
-router.get("/about_guide",async function(req,res){
+router.get("/about_guide",checkAdminAuth, async function(req,res){
     var data = await exe(`SELECT * FROM tour_guide`);
     var obj = {"tour_guide":data};
     res.render("admin/about_guide.ejs",obj);
 });
 
-router.post("/save_guide",async function(req,res){
+router.post("/save_guide", checkAdminAuth, async function(req,res){
     var guide_img = "";
 
     if(req.files){
@@ -201,7 +201,7 @@ router.post("/update_guide", async function (req, res) {
 //     });
 
 //contact page
-router.get("/contact", async function(req, res) {
+router.get("/contact", checkAdminAuth, async function(req, res) {
    
     var data = await exe(`SELECT * FROM contact_form`);
     var obj = { "contact": data };
@@ -228,7 +228,7 @@ router.get("/client_review", async function(req, res) {
 
 });
 
-router.post("/client_details",async function(req,res){
+router.post("/client_details",checkAdminAuth, async function(req,res){
 
 if(req.files){
 var client_image=new Date().getTime()+req.files.client_image.name;
@@ -353,8 +353,29 @@ router.post("/service_update/:id", async function (req, res) {
 });
 
 
-router.get("/dashboard",function(req,res){
-    res.render("admin/dashboard.ejs");
+router.get("/dashboard",checkAdminAuth, async function(req,res){
+
+    var accepted = `SELECT COUNT(*) as accepted_count FROM tour_travels WHERE booking_status = 'Accepted'`;
+    var rejected = `SELECT COUNT(*) as rejected_count FROM tour_travels WHERE booking_status = 'Rejected'`;
+    var pending = `SELECT COUNT(*) as pending_count FROM tour_travels WHERE booking_status = 'pending'`;
+    var total = `SELECT COUNT(*) as total_count FROM tour_travels`;
+
+    var data = await exe(accepted);
+    var accepted_count = data[0].accepted_count;
+    data = await exe(rejected);
+    var rejected_count = data[0].rejected_count;
+    data = await exe(pending);
+    var pending_count = data[0].pending_count;
+    data = await exe(total);
+    var total_count = data[0].total_count;
+
+    var obj = {
+        "accepted_count": accepted_count,
+        "rejected_count": rejected_count,
+        "pending_count": pending_count,
+        "total_count": total_count
+    }
+    res.render("admin/dashboard.ejs", obj);
 });
 
 
@@ -452,6 +473,98 @@ router.post("/update_package_details", async function (req, res) {
         const oldData = await exe("SELECT slider_image3 FROM package_slider WHERE package_slider_id = ?", [package_slider_id]);
         slider_image3 = oldData[0].slider_image3;
     }
+
+    const sql = `UPDATE package_slider 
+                 SET slider_image1 = ?, slider_image2 = ?, slider_image3 = ?  WHERE package_slider_id = ?`;
+    const values = [ slider_image1, slider_image2, slider_image3, package_slider_id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/package_slider");
+});
+
+
+
+router.get("/package_details",async function(req,res){
+    var data = await exe(`SELECT * FROM package_details`);
+    var obj = {"package_details":data};
+    res.render("admin/package_details.ejs",obj);
+});
+
+router.post("/save_package_details",async function(req,res){
+
+    var sql = `INSERT INTO package_details(package_location,package_days,package_person,package_price,package_desc) VALUES (?,?,?,?,?)`;
+
+    var d = req.body;
+    var data = await exe (sql,[d.package_location,d.package_days,d.package_person,d.package_price,d.package_desc]);
+
+    res.redirect("/admin/package_details");
+
+});
+
+router.get("/delete_package_details/:id", async function (req, res) {
+    var package_details_id = req.params.id;
+
+    var sql = `DELETE FROM package_details WHERE package_details_id = '${package_details_id}'`;
+    var data =await exe(sql);
+
+    res.redirect("/admin/package_details");
+});
+
+router.get("/booking_list",async function(req,res){
+    var data = await exe(`SELECT * FROM tour_travels WHERE booking_status = 'pending'`);
+    var obj = {"booking":data};
+    res.render("admin/booking_list.ejs",obj);
+});
+router.get("/accepted",async (req,res)=>{
+    var data = await exe(`SELECT * FROM tour_travels WHERE booking_status = 'Accepted'`);
+    var obj = {"booking":data};
+    res.render("admin/accepted.ejs",obj);
+})
+router.get("/rejected",async (req,res)=>{   
+    var data = await exe(`SELECT * FROM tour_travels WHERE booking_status = 'Rejected'`);
+    var obj = {"booking":data};
+    res.render("admin/rejected.ejs",obj);
+});
+
+router.get("/booking_accepted/:id",async function(req,res){
+    var id = req.params.id;
+    var sql = `UPDATE tour_travels SET booking_status = 'Accepted' WHERE id = ?`;
+    await exe(sql, [id]);
+    res.redirect("/admin/booking_list");
+});
+router.get("/booking_rejected/:id",async function(req,res){
+    var id = req.params.id;
+    var sql = `UPDATE tour_travels SET booking_status = 'Rejected' WHERE id = ?`;
+    await exe(sql, [id]);
+    res.redirect("/admin/booking_list");
+});
+
+
+router.get("/accepted_delete/:id",async function(req,res){
+    var acceptedId =req.params.id;
+    var sql =`DELETE FROM tour_travels where id=${acceptedId}`;
+    await exe(sql);
+    res.redirect("/admin/accepted");
+})
+
+router.get("/rejected_deleted/:id",async function(req,res){    
+    var rejectedId =req.params.id;
+    var sql =`DELETE FROM tour_travels where id=${rejectedId}`;
+    await exe(sql);
+    res.redirect("/admin/rejected");
+});
+router.get("/edit_package_details/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = "SELECT * FROM package_details WHERE package_details_id = ?";
+    var result = await exe(sql, [id]);
+
+    res.render("admin/edit_package_details.ejs", { package_details:result[0] });
+});
+
+router.post("/update_package_details", async function (req, res) {
+    const { package_details_id, package_location, package_days, package_person, package_price, package_desc } = req.body;
 
     // SQL Update Query
     const sql = `UPDATE package_details 

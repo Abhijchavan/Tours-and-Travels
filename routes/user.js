@@ -14,13 +14,21 @@ router.use(express.urlencoded({ extended: true }));
 
 
 router.get("/",async (req,res)=>{
-    var service = await exe(`SELECT * FROM service_card`);
-    var client_reviews = await exe(`SELECT * FROM client_reviews`);
-  var data = await exe(`SELECT * FROM package_details`)
-var faq = await exe(`SELECT * FROM faq`);
-  var client_review= await exe(`SELECT * FROM client_reviews`);
-  var tour_guide = await exe(`SELECT * FROM tour_guide`);
-  var about = await exe(`SELECT * FROM about`);
+    var service = await exe(`SELECT * FROM service_card LIMIT 4`);
+    var client_reviews = await exe(`SELECT * FROM client_reviews LIMIT 4`);
+    var data = await exe(`SELECT * FROM package_details LIMIT 3`)
+    var faq = await exe(`SELECT * FROM faq LIMIT 4`);
+    var client_review= await exe(`SELECT * FROM client_reviews LIMIT 4`);
+    var tour_guide = await exe(`SELECT * FROM tour_guide LIMIT 4`);
+    var about = await exe(`SELECT * FROM about LIMIT 4`);
+    
+
+//     var client_reviews = await exe(`SELECT * FROM client_reviews`);
+//   var data = await exe(`SELECT * FROM package_details`)
+// var faq = await exe(`SELECT * FROM faq`);
+//   var client_review= await exe(`SELECT * FROM client_reviews`);
+//   var tour_guide = await exe(`SELECT * FROM tour_guide`);
+//   var about = await exe(`SELECT * FROM about`);
     var obj = {"service_card_info":service,"client_info":client_reviews , "package_details":data, "faq_info":faq, "client_review":client_review,"tour_guide":tour_guide,"about":about};
     res.render("user/home.ejs",obj);
 
@@ -121,12 +129,14 @@ router.get("/book_bus", async (req, res) => {
     res.render("user/book_bus.ejs", { from, to });
 });
 
-router.get('/user/check_available_seat', async (req, res) => {
-    const from = req.query.from || "";
-    const to = req.query.to || "";
-    const date = req.query.date || "";
-  
-    res.render("user/check_available_seat.ejs",{from,to,date});
+router.post("/book_tour", async (req, res) => {
+    const { name, user_name,date_time, destination, special_request } = req.body;
+   
+        await exe(`INSERT INTO tour_travels(name, user_name,date_time, destination, special_request) VALUES ('${name}', '${user_name}', '${date_time}', '${destination}', '${special_request}')`);
+        // res.redirect("user/about");
+        res.redirect("/");
+
+    
 });
 
 module.exports = router;
