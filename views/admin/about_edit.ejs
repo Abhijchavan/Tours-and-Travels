@@ -1,0 +1,26 @@
+<%-include("navbar.ejs"); %>
+<div class="row">
+	<div class="col-12">
+        <p class="h3 mb-3"><strong>About</strong> Page Details</p>
+			<form action="/admin/update_about" method="post" enctype="multipart/form-data">
+			  <div class="col-md-12 mb-3" >
+                            <input type="hidden" name="about_id" class="form-control" value="<%- about.about_id %>">
+                        </div>
+                        <div class="col-md-6 mb-3">
+							About page Description
+							<input type="text" name="about_description" class="form-control" value="<%- about.about_description %>">   
+						</div>
+                        <div class="col-md-6 mb-3">
+                            Upload About Page Image 
+							<input type="file" name="about_img" class="form-control" value="<%- about.about_img %>">   
+						</div>
+                        <div class="col-md-6 mb-3">
+							<img src="/admin_assets/about/<%- about.about_img %>" width="100px">
+						</div>
+                        <div class="col-md-12 mb-3" class="text-center">
+							<button class="btn btn-lg btn-primary" type="submit">update Info</button>   
+						</div>
+		</form>
+    </div>
+</div>
+<%-include("footer.ejs"); %>

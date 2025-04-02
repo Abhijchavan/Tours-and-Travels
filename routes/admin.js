@@ -69,6 +69,43 @@ var data=await exe(sql);
 res.redirect("/admin/about");  
 });
 
+router.get("/about_edit/:id", async function (req, res) {
+    var id = req.params.id;
+
+    var sql = "SELECT * FROM about WHERE about_id = ?";
+    var result = await exe(sql, [id]);
+
+    res.render("admin/about_edit.ejs", { about:result[0] });
+});
+
+router.post("/update_about", async function (req, res) {
+    const { about_id, about_description} = req.body;
+
+    let about_img = null;
+
+    // Check if a file was uploaded
+    if (req.files && req.files.about_img) {
+        about_img = new Date().getTime() + "-" + req.files.about_img.name;
+        await req.files.about_img.mv("public/admin_assets/about/" + about_img); 
+    } else {
+        // If no new file is uploaded, keep the old image
+        const oldData = await exe("SELECT about_img FROM about WHERE about_id = ?", [about_id]);
+        about_img = oldData[0].about_img;
+    }
+
+    
+
+    // SQL Update Query
+    const sql = `UPDATE about 
+                 SET about_description = ? , about_img = ?
+                 WHERE about_id = ?`;
+    const values = [about_description, about_img, about_id];
+
+    await exe(sql, values);
+
+    res.redirect("/admin/about");
+});
+
 router.get("/about_delete/:id",async function (req,res) {
    
     let aboutId = req.params.id;
