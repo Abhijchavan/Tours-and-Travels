@@ -641,4 +641,9 @@ router.get("/gallary_delete/:id", async function (req, res) {
     res.redirect("/admin/gallary");
 });
 
+
+router.get("/Add_Bus",async (req,res)=>{
+
+    res.render("admin/add_bus.ejs")
+})
 module.exports = router;

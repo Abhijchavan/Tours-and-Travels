@@ -1,0 +1,22 @@
+<%-include("navbar.ejs"); %>
+
+<div class="row">
+    <div class="col-12">
+    <p class="h3 mb-3"><strong>Services Card</strong> Page Details</p>
+
+    <form action="/admin/add_bus_save" method="post" class="service_form" enctype="multipart/form-data">
+   
+    <h5>Services Card Title</h5>
+    <input name="bus_company" class="form-control" placeholder="Bus Company" rows="4">
+    <br>
+    
+    <h5>Service Card Description</h5>
+    <textarea name="service_card_description" class="form-control" placeholder="Service Card Description" rows="4"></textarea>
+    <br>
+    <button class="btn btn-primary btn-lg"> Submit</button>
+    </form>
+
+
+<hr>
+</div></div>
+<%-include("footer.ejs"); %>
